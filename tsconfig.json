@@ -1,0 +1,28 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "baseUrl": "./src",
+    "moduleResolution": "node",
+    "declaration": true,
+    "noEmitHelpers": false,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "sourceMap": true,
+    "pretty": true,
+    "allowUnreachableCode": true,
+    "noImplicitAny": false,
+    "noImplicitReturns": false,
+    "noImplicitUseStrict": false,
+    "noFallthroughCasesInSwitch": false,
+    "skipLibCheck": true,
+    "outDir": "release",
+    "target": "es5",
+    "typeRoots": [],
+    "lib": [
+        "es5",
+        "es6",
+        "dom"
+    ]
+  },
+  "files": [ "./src/index.ts" ]
+}
