@@ -1,7 +1,25 @@
-import { ComponentsStore, KioComponentItem, ItemIterator, ItemMapper } from './ComponentsStore.class'
+import { KioComponentItem, IndexSymbol, ItemIterator, ItemMapper } from './interfaces'
+export * from './interfaces'
 import { KioContent } from 'kio-ng2'
 
+import { ComponentsStore } from './ComponentsStore.class'
+
 const store = new ComponentsStore()
+
+export const registerIndex = ( indexName:string, indexSymbols:IndexSymbol[] ) => {
+
+  console.log('registerIndex >%s<', indexName)
+  const t = `${indexSymbols.length} symbols`
+  console.groupCollapsed(t)
+  console.table(indexSymbols)
+  console.groupEnd()
+
+
+  indexSymbols.forEach(item => {
+    store.addSymbol ( indexName, item )
+  })
+
+}
 
 export const registerComponent = ( item:KioComponentItem ) => {
   store.addItem(item)

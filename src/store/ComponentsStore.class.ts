@@ -1,26 +1,26 @@
-import { ComponentFixture, QueryableAnnotation } from '../query/interfaces'
+//import { ComponentFixture, QueryableAnnotation } from '../query/interfaces'
+import { 
+  KioComponentItem, 
+  ItemIterator, ItemFilter, ItemMapper,
+  IndexSymbol 
+} from './interfaces'
+
 import { assertComponent, matchComponent } from '../query/Query'
 import * as _ from 'lodash'
 
 import { KioNode, KioFragment, KioContent } from 'kio-ng2'
 
-export interface KioComponentItem {
-  fixture:ComponentFixture;
-  criteria:QueryableAnnotation;
-  componentName:string;
-  component:any;
+const indexToProp = {
+  "PublicationComponents": "component",
+  "PublicationFixtures": "fixture",
+  "PublicationCriterias": "criteria"
 }
 
-export interface ItemIterator {
-  ( item:KioComponentItem, idx?:number, list?:KioComponentItem[] ):void
-}
-
-export interface ItemMapper {
-  ( item:KioComponentItem, idx?:number, list?:KioComponentItem[] ):any
-}
-
-export interface ItemFilter {
-  ( item:KioComponentItem, idx?:number, list?:KioComponentItem[] ):boolean
+const emptyItem:KioComponentItem = {
+  componentName: undefined,
+  component: undefined,
+  fixture: undefined,
+  criteria: undefined
 }
 
 export class ComponentsStore {
@@ -33,6 +33,38 @@ export class ComponentsStore {
    */
   addItem ( item:KioComponentItem ) {
     this.items.push ( item )
+  }
+
+  addSymbol ( indexName:string, indexSymbol:IndexSymbol ) {
+    const {
+      componentName,
+      symbol
+    } = indexSymbol
+
+    const propKey:string = indexToProp[indexName]
+
+    let componentItem = this.find((item,idx)=>item.componentName === componentName )
+    if ( !componentItem )
+    {
+      componentItem = {
+        ...emptyItem,
+        componentName
+      }
+      this.addItem(componentItem)
+    }
+    this.updateItem(componentItem,propKey,symbol)
+  }
+
+  updateItem ( item:KioComponentItem, key:string, value:any ) {
+    const items = this.items.slice()
+    this.items = items.map ( ( mapItem, idx ) => {
+      if ( item !== mapItem )
+        return mapItem
+      return {
+        ...item ,
+        [key]: value
+      }
+    } )
   }
 
   filter ( filter:ItemFilter ):KioComponentItem[] {

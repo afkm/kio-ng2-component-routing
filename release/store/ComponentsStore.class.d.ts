@@ -1,20 +1,5 @@
-import { ComponentFixture, QueryableAnnotation } from '../query/interfaces';
+import { KioComponentItem, ItemIterator, ItemFilter, ItemMapper, IndexSymbol } from './interfaces';
 import { KioContent } from 'kio-ng2';
-export interface KioComponentItem {
-    fixture: ComponentFixture;
-    criteria: QueryableAnnotation;
-    componentName: string;
-    component: any;
-}
-export interface ItemIterator {
-    (item: KioComponentItem, idx?: number, list?: KioComponentItem[]): void;
-}
-export interface ItemMapper {
-    (item: KioComponentItem, idx?: number, list?: KioComponentItem[]): any;
-}
-export interface ItemFilter {
-    (item: KioComponentItem, idx?: number, list?: KioComponentItem[]): boolean;
-}
 export declare class ComponentsStore {
     items: KioComponentItem[];
     /**
@@ -22,6 +7,8 @@ export declare class ComponentsStore {
      * @param {KioComponentItem} item
      */
     addItem(item: KioComponentItem): void;
+    addSymbol(indexName: string, indexSymbol: IndexSymbol): void;
+    updateItem(item: KioComponentItem, key: string, value: any): void;
     filter(filter: ItemFilter): KioComponentItem[];
     find(filter: ItemFilter): KioComponentItem;
     getAt(idx: number): KioComponentItem;

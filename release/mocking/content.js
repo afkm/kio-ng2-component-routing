@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var kio_ng2_1 = require("kio-ng2");
-var _cuid = require("cuid");
+var _cuid = require('cuid');
 var parseModifiers = function (value) { return (value.match(/\.(\w+)/gm) || []).map(function (v) { return v.substr(1); }); };
 var parseTypeName = function (value) { return (value.match(/^\w+/) || [])[0]; };
 var parseTypeParams = function (value) { return (value.match(/(\(.+\))/) || [])[0]; };

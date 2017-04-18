@@ -1,5 +1,6 @@
 import { KioContentModel, KioFragmentModel } from 'kio-ng2'
-import * as _cuid from 'cuid'
+declare const require
+const _cuid = require('cuid')
 
 const parseModifiers = ( value:string ):string[] => (value.match ( /\.(\w+)/gm )||[]).map ( v => v.substr(1) )
 const parseTypeName = ( value:string ):string => (value.match(/^\w+/)||[])[0]
