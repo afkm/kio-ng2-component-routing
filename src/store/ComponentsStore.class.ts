@@ -23,6 +23,10 @@ const emptyItem:KioComponentItem = {
   criteria: undefined
 }
 
+const normalizeComponentName = ( name:string ) => {
+  return name.replace(/Component$/,'')
+}
+
 export class ComponentsStore {
 
   items:KioComponentItem[]=[]
@@ -43,12 +47,12 @@ export class ComponentsStore {
 
     const propKey:string = indexToProp[indexName]
 
-    let componentItem = this.find((item,idx)=>item.componentName === componentName )
+    let componentItem = this.find((item,idx)=> normalizeComponentName(item.componentName) === normalizeComponentName(componentName) )
     if ( !componentItem )
     {
       componentItem = {
         ...emptyItem,
-        componentName
+        componentName: normalizeComponentName(componentName)
       }
       this.addItem(componentItem)
     }
@@ -91,7 +95,7 @@ export class ComponentsStore {
 
   findItemForNode ( node:KioContent ):number {
     return _.findIndex(this.items, ( item:KioComponentItem, idx:number ):boolean => {
-      return matchComponent ( item.criteria ) ( node )
+      return item.criteria && matchComponent ( item.criteria ) ( node )
     } )
   }
 

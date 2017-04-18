@@ -21,6 +21,9 @@ var emptyItem = {
     fixture: undefined,
     criteria: undefined
 };
+var normalizeComponentName = function (name) {
+    return name.replace(/Component$/, '');
+};
 var ComponentsStore = (function () {
     function ComponentsStore() {
         this.items = [];
@@ -35,9 +38,9 @@ var ComponentsStore = (function () {
     ComponentsStore.prototype.addSymbol = function (indexName, indexSymbol) {
         var componentName = indexSymbol.componentName, symbol = indexSymbol.symbol;
         var propKey = indexToProp[indexName];
-        var componentItem = this.find(function (item, idx) { return item.componentName === componentName; });
+        var componentItem = this.find(function (item, idx) { return normalizeComponentName(item.componentName) === normalizeComponentName(componentName); });
         if (!componentItem) {
-            componentItem = __assign({}, emptyItem, { componentName: componentName });
+            componentItem = __assign({}, emptyItem, { componentName: normalizeComponentName(componentName) });
             this.addItem(componentItem);
         }
         this.updateItem(componentItem, propKey, symbol);
@@ -70,7 +73,7 @@ var ComponentsStore = (function () {
     };
     ComponentsStore.prototype.findItemForNode = function (node) {
         return _.findIndex(this.items, function (item, idx) {
-            return Query_1.matchComponent(item.criteria)(node);
+            return item.criteria && Query_1.matchComponent(item.criteria)(node);
         });
     };
     return ComponentsStore;
