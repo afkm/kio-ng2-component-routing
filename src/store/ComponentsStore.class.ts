@@ -93,7 +93,7 @@ export class ComponentsStore {
     return this.items.map ( ( item:KioComponentItem, idx:number ) => mapper ( item, idx, clonedList ) )
   }
 
-  findItemForNode ( node:KioContent ):number {
+  findItemForNode ( node:KioContent|KioFragment ):number {
     return _.findIndex(this.items, ( item:KioComponentItem, idx:number ):boolean => {
       return item.criteria && matchComponent ( item.criteria ) ( node )
     } )

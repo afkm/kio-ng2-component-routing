@@ -1,5 +1,5 @@
 import { KioComponentItem, ItemIterator, ItemFilter, ItemMapper, IndexSymbol } from './interfaces';
-import { KioContent } from 'kio-ng2';
+import { KioFragment, KioContent } from 'kio-ng2';
 export declare class ComponentsStore {
     items: KioComponentItem[];
     /**
@@ -14,5 +14,5 @@ export declare class ComponentsStore {
     getAt(idx: number): KioComponentItem;
     eachItem(iterator: ItemIterator): void;
     mapItems(mapper: ItemMapper): any[];
-    findItemForNode(node: KioContent): number;
+    findItemForNode(node: KioContent | KioFragment): number;
 }
