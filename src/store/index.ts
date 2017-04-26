@@ -1,18 +1,20 @@
 import { KioComponentItem, IndexSymbol, ItemIterator, ItemMapper } from './interfaces'
 export * from './interfaces'
-import { KioContent } from 'kio-ng2'
+import { KioContent, KioFragment } from 'kio-ng2'
 
-import { ComponentsStore } from './ComponentsStore.class'
-
-const store = new ComponentsStore()
+export * from './store'
+import { store } from './store'
 
 export const registerIndex = ( indexName:string, indexSymbols:IndexSymbol[] ) => {
 
-  console.log('registerIndex >%s<', indexName)
-  const t = `${indexSymbols.length} symbols`
-  console.groupCollapsed(t)
-  console.table(indexSymbols)
-  console.groupEnd()
+  if ( process.env.NODE_ENV === 'debug' )
+  {
+    console.log('registerIndex >%s<', indexName)
+    const t = `${indexSymbols.length} symbols`
+    console.groupCollapsed(t)
+    console.table(indexSymbols)
+    console.groupEnd()
+  }
 
 
   indexSymbols.forEach(item => {
@@ -25,10 +27,12 @@ export const registerComponent = ( item:KioComponentItem ) => {
   store.addItem(item)
 }
 
-export const getAllComponents = ():KioComponentItem[] => store.items.slice()
+export const getAllComponents = ():KioComponentItem[] => {
+  return store.items.slice()
+}
 
 export const getComponentAt = ( idx:number ):KioComponentItem => store.getAt(idx)
 
 export const getComponentByName = ( componentName:string ):KioComponentItem => store.find ( ( item:KioComponentItem, idx:number, list:KioComponentItem[] ):boolean => item.componentName === componentName )
 
-export const getComponentIndexForNode = ( node:KioContent ):number => store.findItemForNode ( node )
+export const getComponentIndexForNode = ( node:KioContent|KioFragment ):number => store.findItemForNode ( node )

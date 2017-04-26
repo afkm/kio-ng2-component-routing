@@ -38,12 +38,22 @@ var ComponentsStore = (function () {
     ComponentsStore.prototype.addSymbol = function (indexName, indexSymbol) {
         var componentName = indexSymbol.componentName, symbol = indexSymbol.symbol;
         var propKey = indexToProp[indexName];
+        /*    console.log('add symbol for index "%s"', indexName)
+            console.log('prop key "%s"', propKey)
+            console.log('component name',componentName)
+            console.log('symbol',symbol)
+        */
         var componentItem = this.find(function (item, idx) { return normalizeComponentName(item.componentName) === normalizeComponentName(componentName); });
         if (!componentItem) {
             componentItem = __assign({}, emptyItem, { componentName: normalizeComponentName(componentName) });
             this.addItem(componentItem);
         }
         this.updateItem(componentItem, propKey, symbol);
+    };
+    ComponentsStore.prototype.indexOfSymbol = function (symbol) {
+        return this.findIndex(function (item, idx) {
+            return item.component === symbol || item.criteria === symbol || item.fixture === symbol;
+        });
     };
     ComponentsStore.prototype.updateItem = function (item, key, value) {
         var items = this.items.slice();
@@ -59,6 +69,9 @@ var ComponentsStore = (function () {
     };
     ComponentsStore.prototype.find = function (filter) {
         return _.find(this.items, filter);
+    };
+    ComponentsStore.prototype.findIndex = function (filter) {
+        return _.findIndex(this.items, filter);
     };
     ComponentsStore.prototype.getAt = function (idx) {
         return this.items[idx];
