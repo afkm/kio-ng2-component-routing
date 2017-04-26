@@ -8,11 +8,11 @@ const store = new ComponentsStore()
 
 export const registerIndex = ( indexName:string, indexSymbols:IndexSymbol[] ) => {
 
-  console.log('registerIndex >%s<', indexName)
+  /*console.log('registerIndex >%s<', indexName)
   const t = `${indexSymbols.length} symbols`
   console.groupCollapsed(t)
   console.table(indexSymbols)
-  console.groupEnd()
+  console.groupEnd()*/
 
 
   indexSymbols.forEach(item => {
