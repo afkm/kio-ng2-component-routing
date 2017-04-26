@@ -46,7 +46,11 @@ export class ComponentsStore {
     } = indexSymbol
 
     const propKey:string = indexToProp[indexName]
-
+/*    console.log('add symbol for index "%s"', indexName)
+    console.log('prop key "%s"', propKey)
+    console.log('component name',componentName)
+    console.log('symbol',symbol)
+*/
     let componentItem = this.find((item,idx)=> normalizeComponentName(item.componentName) === normalizeComponentName(componentName) )
     if ( !componentItem )
     {
@@ -57,6 +61,12 @@ export class ComponentsStore {
       this.addItem(componentItem)
     }
     this.updateItem(componentItem,propKey,symbol)
+  }
+
+  indexOfSymbol ( symbol:any ) {
+    return this.findIndex((item,idx)=> {
+      return item.component === symbol || item.criteria === symbol || item.fixture === symbol
+    } )
   }
 
   updateItem ( item:KioComponentItem, key:string, value:any ) {
@@ -77,6 +87,10 @@ export class ComponentsStore {
 
   find ( filter:ItemFilter ):KioComponentItem {
     return _.find(this.items,filter)
+  }
+
+  findIndex ( filter:ItemFilter ):number {
+    return _.findIndex(this.items,filter)
   }
 
   getAt ( idx:number ):KioComponentItem {

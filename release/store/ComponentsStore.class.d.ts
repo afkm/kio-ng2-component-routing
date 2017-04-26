@@ -8,9 +8,11 @@ export declare class ComponentsStore {
      */
     addItem(item: KioComponentItem): void;
     addSymbol(indexName: string, indexSymbol: IndexSymbol): void;
+    indexOfSymbol(symbol: any): number;
     updateItem(item: KioComponentItem, key: string, value: any): void;
     filter(filter: ItemFilter): KioComponentItem[];
     find(filter: ItemFilter): KioComponentItem;
+    findIndex(filter: ItemFilter): number;
     getAt(idx: number): KioComponentItem;
     eachItem(iterator: ItemIterator): void;
     mapItems(mapper: ItemMapper): any[];
