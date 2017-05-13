@@ -8,7 +8,10 @@ import {
 import { assertComponent, matchComponent } from '../query/Query'
 import * as _ from 'lodash'
 
-import { KioNode, KioFragment, KioContent } from 'kio-ng2'
+import { 
+  KioNode, KioFragment, KioContent,
+  KioChildContentType
+} from 'kio-ng2'
 
 const indexToProp = {
   "PublicationComponents": "component",
@@ -21,6 +24,18 @@ const emptyItem:KioComponentItem = {
   component: undefined,
   fixture: undefined,
   criteria: undefined
+}
+
+const isPropKey = ( key:string|keyof KioComponentItem ):key is keyof KioComponentItem => {
+  return key in emptyItem
+}
+
+const propkey = ( key:string|keyof KioComponentItem ):keyof KioComponentItem => {
+  if ( isPropKey(key) )
+  {
+    return key
+  }
+  return indexToProp[key]
 }
 
 const normalizeComponentName = ( name:string ) => {
@@ -39,18 +54,15 @@ export class ComponentsStore {
     this.items.push ( item )
   }
 
-  addSymbol ( indexName:string, indexSymbol:IndexSymbol ) {
+  addSymbol <K extends keyof KioComponentItem, T extends KioComponentItem[K]>( indexName:string|K, indexSymbol:IndexSymbol<K,T> ) {
+
+    const indexPropKey = propkey(indexName)
+
     const {
       componentName,
       symbol
     } = indexSymbol
 
-    const propKey:string = indexToProp[indexName]
-/*    console.log('add symbol for index "%s"', indexName)
-    console.log('prop key "%s"', propKey)
-    console.log('component name',componentName)
-    console.log('symbol',symbol)
-*/
     let componentItem = this.find((item,idx)=> normalizeComponentName(item.componentName) === normalizeComponentName(componentName) )
     if ( !componentItem )
     {
@@ -60,7 +72,7 @@ export class ComponentsStore {
       }
       this.addItem(componentItem)
     }
-    this.updateItem(componentItem,propKey,symbol)
+    this.updateItem(componentItem,indexPropKey,symbol)
   }
 
   indexOfSymbol ( symbol:any ) {
@@ -107,7 +119,7 @@ export class ComponentsStore {
     return this.items.map ( ( item:KioComponentItem, idx:number ) => mapper ( item, idx, clonedList ) )
   }
 
-  findItemForNode ( node:KioContent|KioFragment ):number {
+  findItemForNode <T extends KioChildContentType, K extends KioNode<T>> ( node:K ):number {
     return _.findIndex(this.items, ( item:KioComponentItem, idx:number ):boolean => {
       return item.criteria && matchComponent ( item.criteria ) ( node )
     } )

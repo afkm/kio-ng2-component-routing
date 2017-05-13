@@ -1,3 +1,5 @@
+import { KioCtnFragment, KioCtnTxt, KioCtnSrc, KioPrimitiveContentType, KioChildContentType } from 'kio-ng2'
+
 export interface Predicate { 
   ( arg:any ) : boolean 
 }
@@ -78,9 +80,14 @@ export interface ComponentFixture {
   matching:any
 }
 
-export interface QueryableAnnotation {
-  type:string;
-  modifiers?:ListQuery<string>;
-  childTypes?:ListQuery<string>;
-  fixture?:ComponentFixture
+export type ChildQuery<T extends KioChildContentType> = QueryableAnnotation<T>|T
+
+export interface QueryableAnnotation<T extends KioChildContentType> {
+  type:T;
+  modifiers:ListQuery<string>;
+}
+
+export interface QueryableFragmentAnnotation extends QueryableAnnotation<KioCtnFragment> {
+  type:KioCtnFragment
+  childTypes:ListQuery<QueryableAnnotation<KioChildContentType>>
 }

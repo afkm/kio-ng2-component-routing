@@ -21,6 +21,15 @@ var emptyItem = {
     fixture: undefined,
     criteria: undefined
 };
+var isPropKey = function (key) {
+    return key in emptyItem;
+};
+var propkey = function (key) {
+    if (isPropKey(key)) {
+        return key;
+    }
+    return indexToProp[key];
+};
 var normalizeComponentName = function (name) {
     return name.replace(/Component$/, '');
 };
@@ -36,19 +45,14 @@ var ComponentsStore = (function () {
         this.items.push(item);
     };
     ComponentsStore.prototype.addSymbol = function (indexName, indexSymbol) {
+        var indexPropKey = propkey(indexName);
         var componentName = indexSymbol.componentName, symbol = indexSymbol.symbol;
-        var propKey = indexToProp[indexName];
-        /*    console.log('add symbol for index "%s"', indexName)
-            console.log('prop key "%s"', propKey)
-            console.log('component name',componentName)
-            console.log('symbol',symbol)
-        */
         var componentItem = this.find(function (item, idx) { return normalizeComponentName(item.componentName) === normalizeComponentName(componentName); });
         if (!componentItem) {
             componentItem = __assign({}, emptyItem, { componentName: normalizeComponentName(componentName) });
             this.addItem(componentItem);
         }
-        this.updateItem(componentItem, propKey, symbol);
+        this.updateItem(componentItem, indexPropKey, symbol);
     };
     ComponentsStore.prototype.indexOfSymbol = function (symbol) {
         return this.findIndex(function (item, idx) {

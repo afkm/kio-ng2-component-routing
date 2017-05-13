@@ -3,12 +3,17 @@
   "version": "0.0.4",
   "description": "kio module for ng2 component matching",
   "main": "release/index.js",
+  "module": "src/index.ts",
   "typings": "release/index.d.ts",
   "scripts": {
     "prebuild": "rm -rf ./release",
     "build": "NODE_ENV=production tsc",
+    "build:watch": "./scripts/watch.sh build",
     "preversion": "npm run build",
-    "dev:watch": "nodemon -w ./src -e ts --exec \"npm run build\""
+    "dev:watch": "nodemon -w ./src -e ts --exec \"npm run build\"",
+
+    "test": "ts-mocha ./src/**/*.spec.ts",
+    "test:watch": "./scripts/watch.sh test"
   },
   "keywords": [],
   "author": "",
@@ -24,6 +29,11 @@
     "lodash.find": "^4.6.0"
   },
   "devDependencies": {
+    "@types/mocha": "^2.2.41",
+    "ceylon": "^0.9.1",
+    "mocha": "^3.3.0",
+    "nodemon": "^1.11.0",
+    "ts-mocha": "^1.0.3",
     "tslint": "^5.0.0",
     "typescript": "^2.2.2"
   }

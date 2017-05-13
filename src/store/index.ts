@@ -1,11 +1,36 @@
 import { KioComponentItem, IndexSymbol, ItemIterator, ItemMapper } from './interfaces'
 export * from './interfaces'
-import { KioContent, KioFragment } from 'kio-ng2'
+import { KioContent, KioFragment, KioNode, KioChildContentType, 
+  KioNodeType 
+} from 'kio-ng2'
 
 export * from './store'
 import { store } from './store'
 
-export const registerIndex = ( indexName:string, indexSymbols:IndexSymbol[] ) => {
+import { KioFragmentComponentStructure, KioContentComponentStructure, ComponentStructure, ComponentFragmentStructure } from '../component'
+
+export interface NamedComponentStructure<T extends KioChildContentType> extends ComponentStructure<T> {
+  name: string
+}
+export interface NamedFragmentComponentStructure extends ComponentFragmentStructure {
+  name: string
+}
+
+export type NamedComponent = NamedComponentStructure<KioNodeType.src>|NamedComponentStructure<KioNodeType.txt>|NamedFragmentComponentStructure
+
+export const registerComponentStructure = <T extends KioChildContentType>( data:NamedComponent[] ) => {
+
+  data.forEach ( comp => {
+    store.addSymbol("criteria",{
+      componentName: comp.name,
+      prop: 'criteria',
+      symbol: comp
+    })
+  } )
+
+}
+
+export const registerIndex = <T extends keyof KioComponentItem, K extends KioComponentItem[T]>( indexName:T, indexSymbols:IndexSymbol<T,K>[] ) => {
 
   if ( process.env.NODE_ENV === 'debug' )
   {
@@ -35,4 +60,4 @@ export const getComponentAt = ( idx:number ):KioComponentItem => store.getAt(idx
 
 export const getComponentByName = ( componentName:string ):KioComponentItem => store.find ( ( item:KioComponentItem, idx:number, list:KioComponentItem[] ):boolean => item.componentName === componentName )
 
-export const getComponentIndexForNode = ( node:KioContent|KioFragment ):number => store.findItemForNode ( node )
+export const getComponentIndexForNode = <T extends KioChildContentType, K extends KioNode<T>>( node:K ):number => store.findItemForNode ( node )

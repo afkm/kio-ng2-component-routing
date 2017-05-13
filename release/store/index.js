@@ -5,6 +5,15 @@ function __export(m) {
 Object.defineProperty(exports, "__esModule", { value: true });
 __export(require("./store"));
 var store_1 = require("./store");
+exports.registerComponentStructure = function (data) {
+    data.forEach(function (comp) {
+        store_1.store.addSymbol("criteria", {
+            componentName: comp.name,
+            prop: 'criteria',
+            symbol: comp
+        });
+    });
+};
 exports.registerIndex = function (indexName, indexSymbols) {
     if (process.env.NODE_ENV === 'debug') {
         console.log('registerIndex >%s<', indexName);
