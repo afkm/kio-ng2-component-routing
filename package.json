@@ -13,7 +13,9 @@
     "dev:watch": "nodemon -w ./src -e ts --exec \"npm run build\"",
 
     "test": "ts-mocha ./src/**/*.spec.ts",
-    "test:watch": "./scripts/watch.sh test"
+    "test:watch": "./scripts/watch.sh test",
+    "test:fixture": "ts-mocha ./src/fixture/fixture.spec.ts",
+    "test:fixture:watch": "./scripts/watch.sh test:fixture"
   },
   "keywords": [],
   "author": "",
