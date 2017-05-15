@@ -4,9 +4,10 @@ import expect, { assert } from 'ceylon'
 import { KioContentComponentStructure, KioFragmentComponentStructure } from './'
 
 import { 
-  isListQuery, parseListQuery, fromString, fromObject,
-  isQueryableFragmentAnnotation, isQueryableAnnotation
+  isListQuery, parseListQuery, fromString, fromObject
 } from './from'
+
+import { isQueryableFragmentAnnotation, isQueryableAnnotation } from '../query/interfaces'
 
 import { 
   KioCtnTxt, KioCtnSrc, KioCtnFragment,

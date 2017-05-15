@@ -5,6 +5,20 @@ function __export(m) {
 Object.defineProperty(exports, "__esModule", { value: true });
 __export(require("./store"));
 var store_1 = require("./store");
+var component_1 = require("../component");
+exports.isNamedComponentStructure = function (other) {
+    return ('name' in other
+        &&
+            component_1.isComponentStructure(other));
+};
+exports.isNamedFragmentComponentStructure = function (other) {
+    return ('name' in other
+        &&
+            component_1.isComponentFragmentStructure(other));
+};
+exports.isNamedComponent = function (other) {
+    return exports.isNamedComponentStructure(other) || exports.isNamedFragmentComponentStructure(other);
+};
 exports.registerComponentStructure = function (data) {
     data.forEach(function (comp) {
         store_1.store.addSymbol("criteria", {

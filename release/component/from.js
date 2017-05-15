@@ -2,6 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 var component_class_1 = require("./classes/fragment/component.class");
 var component_class_2 = require("./classes/node/component.class");
+var interfaces_1 = require("../query/interfaces");
 var kio_ng2_1 = require("kio-ng2");
 exports.isListQuery = function (other) {
     return (('length' in other && ('number' === typeof other.length || 'function' === typeof other.length))
@@ -53,18 +54,8 @@ exports.fromString = function (source) {
         }
     }
 };
-exports.isQueryableAnnotation = function (other) {
-    return ('type' in other
-        &&
-            'modifiers' in other && Array.isArray(other.modifiers));
-};
-exports.isQueryableFragmentAnnotation = function (other) {
-    return (exports.isQueryableAnnotation(other)
-        &&
-            kio_ng2_1.isCtnFragment(other.type));
-};
 exports.fromObject = function (annotation) {
-    if (exports.isQueryableFragmentAnnotation(annotation)) {
+    if (interfaces_1.isQueryableFragmentAnnotation(annotation)) {
         return new component_class_1.KioFragmentComponentStructure(annotation.modifiers, annotation.childTypes);
     }
 };

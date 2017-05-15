@@ -2,7 +2,8 @@ import { KioFragmentComponentStructure } from './classes/fragment/component.clas
 import { KioContentComponentStructure } from './classes/node/component.class'
 import { KioComponentStructure } from './classes/component.class'
 import { 
-  QueryableAnnotation, QueryableFragmentAnnotation, ListQuery, valueFilter, valueMatcher
+  QueryableAnnotation, QueryableFragmentAnnotation, ListQuery, valueFilter, valueMatcher,
+  isQueryableAnnotation, isQueryableFragmentAnnotation
 } from '../query/interfaces'
 
 import { 
@@ -85,22 +86,6 @@ export const fromString = <T extends KioNodeType>( source:string ):KioFragmentCo
       return new KioContentComponentStructure(KioNodeType.txt,modifiers)
     }
   }
-}
-
-export const isQueryableAnnotation = <T extends KioChildContentType>( other:any ): other is QueryableAnnotation<T> => {
-  return (
-      'type' in other
-      &&
-      'modifiers' in other && Array.isArray(other.modifiers)      
-    )
-}
-
-export const isQueryableFragmentAnnotation = ( other:any ): other is QueryableFragmentAnnotation => {
-  return (
-      isQueryableAnnotation(other)
-      && 
-      isCtnFragment(other.type)
-    )
 }
 
 export const fromObject = <T extends KioChildContentType> ( annotation:QueryableAnnotation<T>|QueryableFragmentAnnotation  ) => {

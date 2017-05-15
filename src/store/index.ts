@@ -1,13 +1,18 @@
-import { KioComponentItem, IndexSymbol, ItemIterator, ItemMapper } from './interfaces'
+import { 
+  KioComponentItem, IndexSymbol, ItemIterator, ItemMapper
+} from './interfaces'
 export * from './interfaces'
-import { KioContent, KioFragment, KioNode, KioChildContentType, 
-  KioNodeType 
+import { 
+  KioContent, KioFragment, KioNode, KioChildContentType, KioNodeType 
 } from 'kio-ng2'
 
 export * from './store'
 import { store } from './store'
 
-import { KioFragmentComponentStructure, KioContentComponentStructure, ComponentStructure, ComponentFragmentStructure } from '../component'
+import { 
+  KioFragmentComponentStructure, KioContentComponentStructure, ComponentStructure, ComponentFragmentStructure,
+  isComponentStructure, isComponentFragmentStructure
+} from '../component'
 
 export interface NamedComponentStructure<T extends KioChildContentType> extends ComponentStructure<T> {
   name: string
@@ -16,7 +21,27 @@ export interface NamedFragmentComponentStructure extends ComponentFragmentStruct
   name: string
 }
 
+export const isNamedComponentStructure = <T extends KioChildContentType> ( other:any ):other is NamedComponentStructure<T> => {
+  return (
+      'name' in other
+      && 
+      isComponentStructure(other)
+    )
+}
+
+export const isNamedFragmentComponentStructure = ( other:any ):other is NamedFragmentComponentStructure => {
+  return (
+      'name' in other
+      && 
+      isComponentFragmentStructure(other)
+    )
+}
+
 export type NamedComponent = NamedComponentStructure<KioNodeType.src>|NamedComponentStructure<KioNodeType.txt>|NamedFragmentComponentStructure
+
+export const isNamedComponent = ( other:any ):other is NamedComponent => {
+  return isNamedComponentStructure(other) || isNamedFragmentComponentStructure(other)
+}
 
 export const registerComponentStructure = <T extends KioChildContentType>( data:NamedComponent[] ) => {
 
