@@ -1,4 +1,14 @@
-import { KioContentModel, KioFragmentModel } from 'kio-ng2'
+import { 
+  KioContentModel, KioFragmentModel, KioNestedContentType, KioCtnFragment,
+  KioPrimitiveContentType,
+  isPrimitiveContentType,
+  KioChildContentType,
+  isCtnFragment, isCtnPublication, KioCtnSrc, KioCtnTxt,
+  KioNodeType, nodeType, primitiveNodeType, isCtnSrc, isCtnTxt
+} from 'kio-ng2'
+
+import { fromString, fromObject } from '../component/from'
+
 declare const require
 const _cuid = require('cuid')
 
@@ -6,11 +16,23 @@ const parseModifiers = ( value:string ):string[] => (value.match ( /\.(\w+)/gm )
 const parseTypeName = ( value:string ):string => (value.match(/^\w+/)||[])[0]
 const parseTypeParams = ( value:string ):string => (value.match(/(\(.+\))/)||[])[0]
 
-const parse = ( value:string ):any[] => {
+
+export interface MockSchema<T extends KioNodeType> {
+  type:T
+  modifiers:string[]
+  typeParams:string
+}
+
+const parse = <T extends KioNodeType>( value:string ):MockSchema<T> => {
   const typeParams = parseTypeParams ( value )
   const typeName = parseTypeName ( value )
   const modifiers = value.replace(typeParams,'').split('.').slice(1)
-  return [ typeName , modifiers , typeParams ]
+
+  return {
+    type: nodeType<T>(typeName), 
+    modifiers, 
+    typeParams
+  }
 }
 
 
@@ -19,10 +41,11 @@ export const cuid = ( ...params ):string => {
   return '[' + prefixes.join('][')  + ']' + _cuid()
 }
 
-export const mockFragment = ( children:any[], modifiers:string[]=[] ) => {
-  return new KioFragmentModel ( {
+export const mockFragment =( children:any[], modifiers:string[]=[] ):KioFragmentModel<KioCtnFragment> => {
+  return new KioFragmentModel<KioCtnFragment>( <any>{
     cuid: cuid() ,
     modifiers ,
+    type: 'fragment' ,
     children: children.map ( child => {
       if ( child.isKioNode )
         return child
@@ -41,24 +64,36 @@ export const mockContentFromString = ( selector:string ) => {
   return mockContent ( typeName , modifiers )
 }
 
+export const mockPrimitive = <T extends KioPrimitiveContentType>( type:T, modifiers:string[], cuid:string, parent?:KioFragmentModel<KioNestedContentType> ):KioContentModel<T> => {
+  const data = {
+    type ,
+    modifiers,
+    cuid,
+    locale: 'en_US'
+  }
+  return new KioContentModel(type,data,parent)
+}
 
-export const mockContent = ( value:string, modifiers:string[]=[] ) => {
-  const [ typeName , typeModifiers=[] , typeParams='' ] = parse ( value )  
-  const params = typeParams.slice(1,-1)
+export const mockContent = <T extends KioCtnTxt|KioCtnSrc>( value:string|T, modifiers:string[]=[], parent?:KioFragmentModel<KioNestedContentType> ):KioContentModel<T> => {
+  if ( 'string' === typeof value )
+  {
+
+    const { type , modifiers=[] , typeParams='' } = parse ( value )  
+    const params = typeParams.slice(1,-1)
                     .split(';')
+    
+    if ( isPrimitiveContentType(type) )
+    {
+      return mockPrimitive<T>(<T>type,modifiers,cuid(...params),parent)
+    }
+  }
+  else {
+    return mockPrimitive (value,modifiers,cuid(),parent)  
+  }
+
+
                     /*.map ( tupelSrc => tupelSrc.split('=') )
                     .map ( ([key,value]) => ({key, value}) )*/
 
-  const data = { 
-    type: typeName, 
-    modifiers: modifiers.concat(typeModifiers).filter(v=>v) , 
-    cuid: cuid(...params) , 
-    locale: 'en_US'
-  }
-  const node = new KioContentModel ( data )
-  /*const groupLabel = 'mock content for "'+typeName+'" (' + node.cuid + ')'
-  console.groupCollapsed ( groupLabel )
-  console.table ( data )
-  console.groupEnd ()*/
-  return node
+  
 }

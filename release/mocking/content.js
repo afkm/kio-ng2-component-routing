@@ -9,7 +9,11 @@ var parse = function (value) {
     var typeParams = parseTypeParams(value);
     var typeName = parseTypeName(value);
     var modifiers = value.replace(typeParams, '').split('.').slice(1);
-    return [typeName, modifiers, typeParams];
+    return {
+        type: kio_ng2_1.nodeType(typeName),
+        modifiers: modifiers,
+        typeParams: typeParams
+    };
 };
 exports.cuid = function () {
     var params = [];
@@ -24,6 +28,7 @@ exports.mockFragment = function (children, modifiers) {
     return new kio_ng2_1.KioFragmentModel({
         cuid: exports.cuid(),
         modifiers: modifiers,
+        type: 'fragment',
         children: children.map(function (child) {
             if (child.isKioNode)
                 return child;
@@ -38,24 +43,29 @@ exports.mockContentFromString = function (selector) {
     var _a = selector.match(/^(\w+)(\(.*\))?(\.\w+){0,}/), m = _a[0], typeName = _a[1], typeParams = _a[2], modifiers = _a.slice(3);
     return exports.mockContent(typeName, modifiers);
 };
-exports.mockContent = function (value, modifiers) {
-    if (modifiers === void 0) { modifiers = []; }
-    var _a = parse(value), typeName = _a[0], _b = _a[1], typeModifiers = _b === void 0 ? [] : _b, _c = _a[2], typeParams = _c === void 0 ? '' : _c;
-    var params = typeParams.slice(1, -1)
-        .split(';');
-    /*.map ( tupelSrc => tupelSrc.split('=') )
-    .map ( ([key,value]) => ({key, value}) )*/
+exports.mockPrimitive = function (type, modifiers, cuid, parent) {
     var data = {
-        type: typeName,
-        modifiers: modifiers.concat(typeModifiers).filter(function (v) { return v; }),
-        cuid: exports.cuid.apply(void 0, params),
+        type: type,
+        modifiers: modifiers,
+        cuid: cuid,
         locale: 'en_US'
     };
-    var node = new kio_ng2_1.KioContentModel(data);
-    /*const groupLabel = 'mock content for "'+typeName+'" (' + node.cuid + ')'
-    console.groupCollapsed ( groupLabel )
-    console.table ( data )
-    console.groupEnd ()*/
-    return node;
+    return new kio_ng2_1.KioContentModel(type, data, parent);
+};
+exports.mockContent = function (value, modifiers, parent) {
+    if (modifiers === void 0) { modifiers = []; }
+    if ('string' === typeof value) {
+        var _a = parse(value), type = _a.type, _b = _a.modifiers, modifiers_1 = _b === void 0 ? [] : _b, _c = _a.typeParams, typeParams = _c === void 0 ? '' : _c;
+        var params = typeParams.slice(1, -1)
+            .split(';');
+        if (kio_ng2_1.isPrimitiveContentType(type)) {
+            return exports.mockPrimitive(type, modifiers_1, exports.cuid.apply(void 0, params), parent);
+        }
+    }
+    else {
+        return exports.mockPrimitive(value, modifiers, exports.cuid(), parent);
+    }
+    /*.map ( tupelSrc => tupelSrc.split('=') )
+    .map ( ([key,value]) => ({key, value}) )*/
 };
 //# sourceMappingURL=content.js.map
