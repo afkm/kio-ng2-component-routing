@@ -1,5 +1,5 @@
 import { 
-  KioComponentItem, IndexSymbol, ItemIterator, ItemMapper
+  KioComponentItem, IndexSymbol, ItemIterator, ItemMapper, IndexSymbolItem
 } from './interfaces'
 export * from './interfaces'
 import { 
@@ -55,20 +55,23 @@ export const registerComponentStructure = <T extends KioChildContentType>( data:
 
 }
 
-export const registerIndex = <T extends keyof KioComponentItem, K extends KioComponentItem[T]>( indexName:T, indexSymbols:IndexSymbol<T,K>[] ) => {
+export const registerIndex = <T extends keyof KioComponentItem, K extends KioComponentItem[T]>( prop:T, indexSymbolItems:IndexSymbolItem<T,K>[] ) => {
 
   if ( process.env.NODE_ENV === 'debug' )
   {
-    console.log('registerIndex >%s<', indexName)
-    const t = `${indexSymbols.length} symbols`
+    console.log('registerIndex >%s<', prop)
+    const t = `${indexSymbolItems.length} symbols`
     console.groupCollapsed(t)
-    console.table(indexSymbols)
+    console.table(indexSymbolItems)
     console.groupEnd()
   }
 
 
-  indexSymbols.forEach(item => {
-    store.addSymbol ( indexName, item )
+  indexSymbolItems.forEach(item => {
+    store.addSymbol ( prop, {
+      ...item,
+      prop
+    } )
   })
 
 }

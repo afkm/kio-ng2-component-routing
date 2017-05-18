@@ -13,6 +13,9 @@
     "build:release:watch": "./scripts/watch.sh build:release",
     "preversion": "npm run build",
     "dev:watch": "nodemon -w ./src -e ts --exec \"npm run build\"",
+    "prebuild:release": "rm -rf ./release",
+    "build:release": "NODE_ENV=production tsc",
+    "build:release:watch": "./scripts/watch.sh build:release",
 
     "test": "ts-mocha ./src/**/*.spec.ts",
     "test:watch": "./scripts/watch.sh test",
