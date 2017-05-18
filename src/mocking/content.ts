@@ -1,5 +1,5 @@
 import { 
-  KioContentModel, KioFragmentModel, KioNestedContentType, KioCtnFragment,
+  KioContentModel, KioFragmentModel, KioNestedContentType, KioCtnFragment, KioNodeModel,
   KioPrimitiveContentType,
   isPrimitiveContentType,
   KioChildContentType,
@@ -19,8 +19,25 @@ const parseTypeParams = ( value:string ):string => (value.match(/(\(.+\))/)||[])
 
 export interface MockSchema<T extends KioNodeType> {
   type:T
-  modifiers:string[]
-  typeParams:string
+  cuid?:string
+  modifiers?:string[]
+  typeParams?:string
+}
+
+export type MockedItem = MockSchema<KioNodeType>|KioContentModel<KioPrimitiveContentType>|KioFragmentModel<KioCtnFragment>|string
+
+export function isMockSchema<T extends KioNodeType> ( other:any ):other is MockSchema<T> {
+  return (
+      'type' in other
+      &&
+      (
+        'cuid' in other
+        ||
+        'modifiers' in other
+        ||
+        'typeParams' in other
+      )
+    )
 }
 
 const parse = <T extends KioNodeType>( value:string ):MockSchema<T> => {
@@ -41,20 +58,36 @@ export const cuid = ( ...params ):string => {
   return '[' + prefixes.join('][')  + ']' + _cuid()
 }
 
-export const mockFragment =( children:any[], modifiers:string[]=[] ):KioFragmentModel<KioCtnFragment> => {
+export const mockFragment =( children:MockedItem[], modifiers:string[]=[] ):KioFragmentModel<KioCtnFragment> => {
   return new KioFragmentModel<KioCtnFragment>( <any>{
     cuid: cuid() ,
     modifiers ,
     type: 'fragment' ,
     children: children.map ( child => {
-      if ( child.isKioNode )
+      if ( child instanceof KioNodeModel )
+      {
         return child
+      }
+      if ( isMockSchema<KioPrimitiveContentType>(child) )
+      {
+        if ( <number>child.type !== KioNodeType.fragment )
+        {
+          return new KioContentModel(child.type, <any>child)
+        }
+        if ( <number>child.type === KioNodeType.fragment )
+        {
+          return new KioFragmentModel(<any>child)
+        }
+      }
 
       if ( Array.isArray ( child ) )
       {
         return mockFragment ( child[0], child[1] )
       }
-      return mockContentFromString ( child )
+      if ( 'string' === typeof child )
+      {
+        return mockContentFromString ( child )
+      }
     } )
   } )
 }
@@ -74,7 +107,7 @@ export const mockPrimitive = <T extends KioPrimitiveContentType>( type:T, modifi
   return new KioContentModel(type,data,parent)
 }
 
-export const mockContent = <T extends KioCtnTxt|KioCtnSrc>( value:string|T, modifiers:string[]=[], parent?:KioFragmentModel<KioNestedContentType> ):KioContentModel<T> => {
+export function mockContent <T extends KioCtnTxt|KioCtnSrc>( value:string|T, modifiers:string[]=[], parent?:KioFragmentModel<KioNestedContentType> ):KioContentModel<T> {
   if ( 'string' === typeof value )
   {
 

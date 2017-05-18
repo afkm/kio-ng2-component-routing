@@ -9,6 +9,8 @@
     "prebuild": "rm -rf ./release",
     "build": "NODE_ENV=production tsc",
     "build:watch": "./scripts/watch.sh build",
+    "build:release": "NODE_ENV=production tsc",
+    "build:release:watch": "./scripts/watch.sh build:release",
     "preversion": "npm run build",
     "dev:watch": "nodemon -w ./src -e ts --exec \"npm run build\"",
 
