@@ -1,4 +1,4 @@
-import { KioComponentItem, IndexSymbol } from './interfaces';
+import { KioComponentItem, IndexSymbolItem } from './interfaces';
 export * from './interfaces';
 import { KioNode, KioChildContentType, KioNodeType } from 'kio-ng2';
 export * from './store';
@@ -14,7 +14,7 @@ export declare const isNamedFragmentComponentStructure: (other: any) => other is
 export declare type NamedComponent = NamedComponentStructure<KioNodeType.src> | NamedComponentStructure<KioNodeType.txt> | NamedFragmentComponentStructure;
 export declare const isNamedComponent: (other: any) => other is NamedComponent;
 export declare const registerComponentStructure: <T extends KioChildContentType>(data: NamedComponent[]) => void;
-export declare const registerIndex: <T extends "fixture" | "criteria" | "componentName" | "component", K extends KioComponentItem[T]>(indexName: T, indexSymbols: IndexSymbol<T, K>[]) => void;
+export declare const registerIndex: <T extends "fixture" | "criteria" | "componentName" | "component", K extends KioComponentItem[T]>(prop: T, indexSymbolItems: IndexSymbolItem<T, K>[]) => void;
 export declare const registerComponent: (item: KioComponentItem) => void;
 export declare const getAllComponents: () => KioComponentItem[];
 export declare const getComponentAt: (idx: number) => KioComponentItem;

@@ -26,3 +26,8 @@ export interface IndexSymbol<K extends keyof KioComponentItem, T extends KioComp
   prop:K
   symbol:T;
 }
+
+export interface IndexSymbolItem<K extends keyof KioComponentItem, T extends KioComponentItem[K]> {
+  componentName:string;
+  symbol:T;
+}
