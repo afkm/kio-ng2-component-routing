@@ -18,7 +18,7 @@
     "@types/lodash": "^4.14.62",
     "@types/node": "^7.0.12",
     "cuid": "^1.3.8",
-    "kio-ng2": "github:afkmatze/kio-ng2",
+    "kio-ng2": "github:afkmatze/kio-ng2#v0.0.1",
     "lodash": "^4.17.4",
     "lodash.filter": "^4.6.0",
     "lodash.find": "^4.6.0"
