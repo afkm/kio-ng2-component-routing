@@ -33,14 +33,11 @@ var ContentMockingService = (function () {
         var mockedData = item ? item.fixture : null;
         if (!mockedData)
             return null;
-        if (kio_ng2_1.isCtnFragment(mockedData.type)) {
+        if (mockedData.type === 'fragment') {
             mockedData = new kio_ng2_1.KioFragmentModel(mockedData);
         }
-        else if (kio_ng2_1.isCtnSrc(mockedData.type)) {
-            mockedData = new kio_ng2_1.KioContentModel(mockedData, undefined);
-        }
-        else if (kio_ng2_1.isCtnTxt(mockedData.type)) {
-            mockedData = new kio_ng2_1.KioContentModel(mockedData, undefined);
+        else {
+            mockedData = new kio_ng2_1.KioContentModel(mockedData);
         }
         this.fillContent(mockedData);
         return mockedData;
@@ -64,7 +61,7 @@ var ContentMockingService = (function () {
         if (params === void 0) { params = {}; }
         var mockedData = parseMockingArgs(node.cuid) || {};
         params = __assign({}, params, mockedData);
-        if (kio_ng2_1.isCtnTxt(node.type)) {
+        if (node.type === 'txt') {
             return __assign({ text: 'Lorem ipsum Eiusmod mollit dolor ut irure incididunt exercitation aliqua proident anim minim velit dolor voluptate commodo incididunt eu et proident commodo proident eu nostrud Duis ea nisi non.' }, params);
         }
         return media_1.renderDataForNode(node, params) || params || {};

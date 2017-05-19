@@ -1,4 +1,3 @@
-import { KioCtnFragment, KioChildContentType } from 'kio-ng2';
 export interface Predicate {
     (arg: any): boolean;
 }
@@ -42,14 +41,9 @@ export interface ListQuery<T> extends ValueQuery<ListValue> {
 export interface ComponentFixture {
     matching: any;
 }
-export declare type ChildQuery<T extends KioChildContentType> = QueryableAnnotation<T> | T;
-export interface QueryableAnnotation<T extends KioChildContentType> {
-    type: T;
-    modifiers: ListQuery<string>;
+export interface QueryableAnnotation {
+    type: string;
+    modifiers?: ListQuery<string>;
+    childTypes?: ListQuery<string>;
+    fixture?: ComponentFixture;
 }
-export interface QueryableFragmentAnnotation extends QueryableAnnotation<KioCtnFragment> {
-    type: KioCtnFragment;
-    childTypes: ListQuery<QueryableAnnotation<KioChildContentType>>;
-}
-export declare const isQueryableAnnotation: <T extends KioChildContentType>(other: any) => other is QueryableAnnotation<T>;
-export declare const isQueryableFragmentAnnotation: (other: any) => other is QueryableFragmentAnnotation;
