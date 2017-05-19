@@ -6,7 +6,7 @@ var parseModifiers = function (value) { return (value.match(/\.(\w+)/gm) || []).
 var parseTypeName = function (value) { return (value.match(/^\w+/) || [])[0]; };
 var parseTypeParams = function (value) { return (value.match(/(\(.+\))/) || [])[0]; };
 function isMockSchema(other) {
-    return ('type' in other
+    return (!!other.type
         &&
             ('cuid' in other
                 ||

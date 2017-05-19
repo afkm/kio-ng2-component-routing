@@ -28,7 +28,7 @@ export type MockedItem = MockSchema<KioNodeType>|KioContentModel<KioPrimitiveCon
 
 export function isMockSchema<T extends KioNodeType> ( other:any ):other is MockSchema<T> {
   return (
-      'type' in other
+      !!other.type
       &&
       (
         'cuid' in other

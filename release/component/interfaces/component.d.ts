@@ -3,7 +3,7 @@ import { QueryableAnnotation, QueryableFragmentAnnotation } from '../../query/in
 import { ListQuery } from '../../query/interfaces';
 export interface ComponentStructure<T extends KioChildContentType> extends QueryableAnnotation<T> {
 }
-export declare const isComponentStructure: <T extends KioChildContentType>(other: any) => other is ComponentStructure<T>;
+export declare const isComponentStructure: <T extends any>(other: any) => other is ComponentStructure<T>;
 export interface ComponentFragmentStructure extends QueryableFragmentAnnotation {
     childTypes: ListQuery<ComponentStructure<KioChildContentType>>;
 }
