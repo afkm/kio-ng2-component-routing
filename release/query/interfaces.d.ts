@@ -51,5 +51,5 @@ export interface QueryableFragmentAnnotation extends QueryableAnnotation<KioCtnF
     type: KioCtnFragment;
     childTypes: ListQuery<QueryableAnnotation<KioChildContentType>>;
 }
-export declare const isQueryableAnnotation: <T extends any>(other: any) => other is QueryableAnnotation<T>;
+export declare const isQueryableAnnotation: <T extends KioChildContentType>(other: any) => other is QueryableAnnotation<T>;
 export declare const isQueryableFragmentAnnotation: (other: any) => other is QueryableFragmentAnnotation;
