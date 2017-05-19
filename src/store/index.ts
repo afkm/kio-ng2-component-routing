@@ -1,77 +1,22 @@
-import { 
-  KioComponentItem, IndexSymbol, ItemIterator, ItemMapper, IndexSymbolItem
-} from './interfaces'
+import { KioComponentItem, IndexSymbol, ItemIterator, ItemMapper } from './interfaces'
 export * from './interfaces'
-import { 
-  KioContent, KioFragment, KioNode, KioChildContentType, KioNodeType 
-} from 'kio-ng2'
+import { KioContent } from 'kio-ng2'
 
-export * from './store'
-import { store } from './store'
+import { ComponentsStore } from './ComponentsStore.class'
 
-import { 
-  KioFragmentComponentStructure, KioContentComponentStructure, ComponentStructure, ComponentFragmentStructure,
-  isComponentStructure, isComponentFragmentStructure
-} from '../component'
+const store = new ComponentsStore()
 
-export interface NamedComponentStructure<T extends KioChildContentType> extends ComponentStructure<T> {
-  name: string
-}
-export interface NamedFragmentComponentStructure extends ComponentFragmentStructure {
-  name: string
-}
+export const registerIndex = ( indexName:string, indexSymbols:IndexSymbol[] ) => {
 
-export const isNamedComponentStructure = <T extends KioChildContentType> ( other:any ):other is NamedComponentStructure<T> => {
-  return (
-      'name' in other
-      && 
-      isComponentStructure(other)
-    )
-}
-
-export const isNamedFragmentComponentStructure = ( other:any ):other is NamedFragmentComponentStructure => {
-  return (
-      'name' in other
-      && 
-      isComponentFragmentStructure(other)
-    )
-}
-
-export type NamedComponent = NamedComponentStructure<KioNodeType.src>|NamedComponentStructure<KioNodeType.txt>|NamedFragmentComponentStructure
-
-export const isNamedComponent = ( other:any ):other is NamedComponent => {
-  return isNamedComponentStructure(other) || isNamedFragmentComponentStructure(other)
-}
-
-export const registerComponentStructure = <T extends KioChildContentType>( data:NamedComponent[] ) => {
-
-  data.forEach ( comp => {
-    store.addSymbol("criteria",{
-      componentName: comp.name,
-      prop: 'criteria',
-      symbol: comp
-    })
-  } )
-
-}
-
-export const registerIndex = <T extends keyof KioComponentItem, K extends KioComponentItem[T]>( prop:T, indexSymbolItems:IndexSymbolItem<T,K>[] ) => {
-
-  if ( process.env.NODE_ENV === 'debug' )
-  {
-    console.log('registerIndex >%s<', prop)
-    const t = `${indexSymbolItems.length} symbols`
-    console.groupCollapsed(t)
-    console.table(indexSymbolItems)
-    console.groupEnd()
-  }
+  console.log('registerIndex >%s<', indexName)
+  const t = `${indexSymbols.length} symbols`
+  console.groupCollapsed(t)
+  console.table(indexSymbols)
+  console.groupEnd()
 
 
-  indexSymbolItems.forEach(item => {
-    store.addSymbol ( prop, {
-      ...item,
-      prop
-    } )
+  indexSymbols.forEach(item => {
+    store.addSymbol ( indexName, item )
   })
 
 }
@@ -80,12 +25,10 @@ export const registerComponent = ( item:KioComponentItem ) => {
   store.addItem(item)
 }
 
-export const getAllComponents = ():KioComponentItem[] => {
-  return store.items.slice()
-}
+export const getAllComponents = ():KioComponentItem[] => store.items.slice()
 
 export const getComponentAt = ( idx:number ):KioComponentItem => store.getAt(idx)
 
 export const getComponentByName = ( componentName:string ):KioComponentItem => store.find ( ( item:KioComponentItem, idx:number, list:KioComponentItem[] ):boolean => item.componentName === componentName )
 
-export const getComponentIndexForNode = <T extends KioChildContentType, K extends KioNode<T>>( node:K ):number => store.findItemForNode ( node )
+export const getComponentIndexForNode = ( node:KioContent ):number => store.findItemForNode ( node )

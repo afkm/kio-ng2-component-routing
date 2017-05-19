@@ -8,10 +8,7 @@ import {
 import { assertComponent, matchComponent } from '../query/Query'
 import * as _ from 'lodash'
 
-import { 
-  KioNode, KioFragment, KioContent,
-  KioChildContentType
-} from 'kio-ng2'
+import { KioNode, KioFragment, KioContent } from 'kio-ng2'
 
 const indexToProp = {
   "PublicationComponents": "component",
@@ -24,18 +21,6 @@ const emptyItem:KioComponentItem = {
   component: undefined,
   fixture: undefined,
   criteria: undefined
-}
-
-const isPropKey = ( key:string|keyof KioComponentItem ):key is keyof KioComponentItem => {
-  return key in emptyItem
-}
-
-const propkey = ( key:string|keyof KioComponentItem ):keyof KioComponentItem => {
-  if ( isPropKey(key) )
-  {
-    return key
-  }
-  return indexToProp[key]
 }
 
 const normalizeComponentName = ( name:string ) => {
@@ -54,14 +39,13 @@ export class ComponentsStore {
     this.items.push ( item )
   }
 
-  addSymbol <K extends keyof KioComponentItem, T extends KioComponentItem[K]>( indexName:string|K, indexSymbol:IndexSymbol<K,T> ) {
-
-    const indexPropKey = propkey(indexName)
-
+  addSymbol ( indexName:string, indexSymbol:IndexSymbol ) {
     const {
       componentName,
       symbol
     } = indexSymbol
+
+    const propKey:string = indexToProp[indexName]
 
     let componentItem = this.find((item,idx)=> normalizeComponentName(item.componentName) === normalizeComponentName(componentName) )
     if ( !componentItem )
@@ -72,13 +56,7 @@ export class ComponentsStore {
       }
       this.addItem(componentItem)
     }
-    this.updateItem(componentItem,indexPropKey,symbol)
-  }
-
-  indexOfSymbol ( symbol:any ) {
-    return this.findIndex((item,idx)=> {
-      return item.component === symbol || item.criteria === symbol || item.fixture === symbol
-    } )
+    this.updateItem(componentItem,propKey,symbol)
   }
 
   updateItem ( item:KioComponentItem, key:string, value:any ) {
@@ -101,10 +79,6 @@ export class ComponentsStore {
     return _.find(this.items,filter)
   }
 
-  findIndex ( filter:ItemFilter ):number {
-    return _.findIndex(this.items,filter)
-  }
-
   getAt ( idx:number ):KioComponentItem {
     return this.items[idx]
   }
@@ -119,7 +93,7 @@ export class ComponentsStore {
     return this.items.map ( ( item:KioComponentItem, idx:number ) => mapper ( item, idx, clonedList ) )
   }
 
-  findItemForNode <T extends KioChildContentType, K extends KioNode<T>> ( node:K ):number {
+  findItemForNode ( node:KioContent ):number {
     return _.findIndex(this.items, ( item:KioComponentItem, idx:number ):boolean => {
       return item.criteria && matchComponent ( item.criteria ) ( node )
     } )

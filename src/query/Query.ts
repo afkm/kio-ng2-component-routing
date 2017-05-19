@@ -1,24 +1,10 @@
-import { 
-  KioFragment, implementsKioFragment, 
-  isCtnFragment, implementsKioNode,
-  KioCtnFragment, KioNode, KioChildContentType, KioPrimitiveContentType, 
-  KioNodeType
-} from 'kio-ng2'
-import { QueryableAnnotation, QueryableFragmentAnnotation } from './interfaces'
+import { KioFragment, KioNode } from 'kio-ng2'
+import { QueryableAnnotation } from './interfaces'
 
 import * as assert from './assertion'
 import * as _ from '@types/lodash'
 
-const isQueryableFragmentAnnotation = ( other:any ): other is QueryableFragmentAnnotation => {
-  return (
-      implementsKioNode(other)
-      && 
-      isCtnFragment(other.type)
-    )
-}
-
-
-export const assertComponent = <T extends KioChildContentType>( queryableAnnotation : QueryableFragmentAnnotation|QueryableAnnotation<T> ) => ( node:KioFragment<KioCtnFragment>|KioNode<KioPrimitiveContentType> ) : string[]|null => {
+export const assertComponent = ( queryableAnnotation : QueryableAnnotation ) => ( node:KioFragment ) : string[]|null => {
 
   const messages:string[] = []
 
@@ -34,22 +20,19 @@ export const assertComponent = <T extends KioChildContentType>( queryableAnnotat
     messages.push ( 'invalid node modifiers "'+node.modifiers.join(',')+'" for component' )
   }
 
-  if ( isQueryableFragmentAnnotation(queryableAnnotation) && implementsKioFragment(node) )
-  {
-    const childTypes = ((<any>node).children||[]).map(c => c.type)
+  const childTypes = (node.children||[]).map(c => c.type)
 
-    if ( queryableAnnotation.childTypes && assert.query ( queryableAnnotation.childTypes ) ( childTypes ) === false )
-    {
-      //console.log('invalid node childTypes' , childTypes , '- component requires: ', componentAnnotation.childTypes )
-      messages.push ( 'invalid node child types "'+childTypes.join(',')+'" for component. Expected: ' + JSON.stringify(queryableAnnotation.childTypes) )
-    }
+  if ( queryableAnnotation.childTypes && assert.query ( queryableAnnotation.childTypes ) ( childTypes ) === false )
+  {
+    //console.log('invalid node childTypes' , childTypes , '- component requires: ', componentAnnotation.childTypes )
+    messages.push ( 'invalid node child types "'+childTypes.join(',')+'" for component. Expected: ' + JSON.stringify(queryableAnnotation.childTypes) )
   }
 
   return messages.length > 0 ? messages : null
 
 }
 
-export const matchComponent = <T extends KioChildContentType>( componentAnnotation : QueryableFragmentAnnotation|QueryableAnnotation<T> ) => ( node:KioFragment<KioCtnFragment>|KioNode<KioPrimitiveContentType> ):boolean => {
+export const matchComponent = ( componentAnnotation:any ) => ( node:KioFragment ) => {
   
   if ( componentAnnotation.type && assert.eq ( componentAnnotation.type ) ( node.type ) === false )
   {
@@ -63,17 +46,12 @@ export const matchComponent = <T extends KioChildContentType>( componentAnnotati
     return false
   }
 
-  if ( isQueryableFragmentAnnotation(componentAnnotation) && implementsKioFragment(node) )
+  const childTypes = (node.children||[]).map(c => c.type)
+
+  if ( componentAnnotation.childTypes && assert.query ( componentAnnotation.childTypes ) ( childTypes ) === false )
   {
-
-    const childTypes = node.children.map(c => c.type)
-
-    if ( componentAnnotation.childTypes && assert.query ( componentAnnotation.childTypes ) ( childTypes ) === false )
-    {
-      //console.log('invalid node childTypes' , childTypes , '- component requires: ', componentAnnotation.childTypes )
-      return false
-    }
-
+    //console.log('invalid node childTypes' , childTypes , '- component requires: ', componentAnnotation.childTypes )
+    return false
   }
 
   return true

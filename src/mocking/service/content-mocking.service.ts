@@ -1,7 +1,4 @@
-import { KioNode, KioNodeModel, KioContentModel, KioFragmentModel,
- KioChildContentType, KioNodeType,
- isCtnFragment, isCtnSrc, isCtnTxt, isCtnPublication
-} from 'kio-ng2'
+import { KioNode, KioNodeModel, KioContentModel, KioFragmentModel } from 'kio-ng2'
 import * as _ from 'lodash'
 import { KioTxtData, KioSrcData } from 'kio-ng2'
 import { renderDataForNode } from '../media'
@@ -37,17 +34,13 @@ export class ContentMockingService {
     if ( !mockedData )
       return null
 
-    if ( isCtnFragment(mockedData.type) )
+    if ( mockedData.type === 'fragment' )
     {
       mockedData = new KioFragmentModel ( mockedData )
     }
-    else if ( isCtnSrc (mockedData.type) )
+    else 
     {
-      mockedData = new KioContentModel <KioNodeType.src>( mockedData, undefined )
-    }
-    else if ( isCtnTxt (mockedData.type) )
-    {
-      mockedData = new KioContentModel <KioNodeType.txt>( mockedData, undefined )
+      mockedData = new KioContentModel ( mockedData )
     }
     this.fillContent ( mockedData )
     return mockedData
@@ -74,10 +67,10 @@ export class ContentMockingService {
 
   }
 
-  mockContentData <T extends KioChildContentType>( node : KioNode<T>, params:MockedData={} ):any {
+  mockContentData ( node : KioNode, params:MockedData={} ):any {
     const mockedData = parseMockingArgs ( node.cuid ) || {}
     params = {...params , ...mockedData }
-    if ( isCtnTxt(node.type) )
+    if ( node.type === 'txt' )
     {
       return {
         text: 'Lorem ipsum Eiusmod mollit dolor ut irure incididunt exercitation aliqua proident anim minim velit dolor voluptate commodo incididunt eu et proident commodo proident eu nostrud Duis ea nisi non.',
