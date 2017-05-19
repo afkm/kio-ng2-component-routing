@@ -1,7 +1,8 @@
 import { ComponentFixture, QueryableAnnotation } from '../query/interfaces';
+import { KioChildContentType } from 'kio-ng2';
 export interface KioComponentItem {
     fixture: ComponentFixture;
-    criteria: QueryableAnnotation;
+    criteria: QueryableAnnotation<KioChildContentType>;
     componentName: string;
     component: any;
 }
@@ -14,7 +15,12 @@ export interface ItemMapper {
 export interface ItemFilter {
     (item: KioComponentItem, idx?: number, list?: KioComponentItem[]): boolean;
 }
-export interface IndexSymbol {
+export interface IndexSymbol<K extends keyof KioComponentItem, T extends KioComponentItem[K]> {
     componentName: string;
-    symbol: any;
+    prop: K;
+    symbol: T;
+}
+export interface IndexSymbolItem<K extends keyof KioComponentItem, T extends KioComponentItem[K]> {
+    componentName: string;
+    symbol: T;
 }

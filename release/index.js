@@ -5,6 +5,7 @@ function __export(m) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var assertion = require("./query/assertion");
 exports.assertion = assertion;
+__export(require("./query/interfaces"));
 var mock = require("./mocking");
 exports.mock = mock;
 var mocking_1 = require("./mocking");

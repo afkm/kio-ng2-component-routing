@@ -1,14 +1,23 @@
 {
   "name": "kio-ng2-component-routing",
-  "version": "0.0.3",
+  "version": "0.0.5",
   "description": "kio module for ng2 component matching",
   "main": "release/index.js",
+  "module": "src/index.ts",
   "typings": "release/index.d.ts",
   "scripts": {
     "prebuild": "rm -rf ./release",
     "build": "NODE_ENV=production tsc",
+    "build:watch": "./scripts/watch.sh build",
+    "build:release": "NODE_ENV=production tsc",
+    "build:release:watch": "./scripts/watch.sh build:release",
     "preversion": "npm run build",
-    "dev:watch": "nodemon -w ./src -e ts --exec \"npm run build\""
+    "dev:watch": "nodemon -w ./src -e ts --exec \"npm run build\"",
+    "prebuild:release": "rm -rf ./release",
+    "test": "ts-mocha ./src/**/*.spec.ts",
+    "test:watch": "./scripts/watch.sh test",
+    "test:fixture": "ts-mocha ./src/fixture/fixture.spec.ts",
+    "test:fixture:watch": "./scripts/watch.sh test:fixture"
   },
   "keywords": [],
   "author": "",
@@ -24,6 +33,11 @@
     "lodash.find": "^4.6.0"
   },
   "devDependencies": {
+    "@types/mocha": "^2.2.41",
+    "ceylon": "^0.9.1",
+    "mocha": "^3.3.0",
+    "nodemon": "^1.11.0",
+    "ts-mocha": "^1.0.3",
     "tslint": "^5.0.0",
     "typescript": "^2.2.2"
   }
