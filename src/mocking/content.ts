@@ -1,3 +1,7 @@
+/**
+ * @module ContentMocking
+ */
+
 import { KioContentModel, KioFragmentModel } from 'kio-ng2'
 declare const require
 const _cuid = require('cuid')
@@ -12,7 +16,6 @@ const parse = ( value:string ):any[] => {
   const modifiers = value.replace(typeParams,'').split('.').slice(1)
   return [ typeName , modifiers , typeParams ]
 }
-
 
 export const cuid = ( ...params ):string => {
   const prefixes = [ 'mock' , ...params ]  

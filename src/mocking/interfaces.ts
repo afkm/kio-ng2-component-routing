@@ -1,4 +1,8 @@
-import { KioMediaType } from '../enums/kio-media-types.enum'
+/**
+ * @module ContentMocking
+ */
+
+import { KioMediaType } from 'kio-ng2'
 
 export interface MockingOptions {
   mediaType:KioMediaType  

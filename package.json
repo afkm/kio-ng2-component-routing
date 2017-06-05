@@ -6,10 +6,12 @@
   "module": "src/index.ts",
   "typings": "release/index.d.ts",
   "scripts": {
+    "copy:release": "./scripts/copy_release.sh",
     "prebuild": "rm -rf ./release",
     "build": "NODE_ENV=production tsc",
     "build:watch": "./scripts/watch.sh build",
     "build:release": "NODE_ENV=production tsc",
+    "postbuild:release": "npm run copy:release",
     "build:release:watch": "./scripts/watch.sh build:release",
     "preversion": "npm run build",
     "dev:watch": "nodemon -w ./src -e ts --exec \"npm run build\"",
@@ -17,7 +19,10 @@
     "test": "ts-mocha ./src/**/*.spec.ts",
     "test:watch": "./scripts/watch.sh test",
     "test:fixture": "ts-mocha ./src/fixture/fixture.spec.ts",
-    "test:fixture:watch": "./scripts/watch.sh test:fixture"
+    "test:fixture:watch": "./scripts/watch.sh test:fixture",
+    "pretypedoc": "rm -rf ./doc",
+    "typedoc": "typedoc --target es6 --name kio-ng2-component-routing --exclude *.spec.ts --out doc ./src",
+    "typedoc:watch": "./scripts/watch.sh typedoc"
   },
   "keywords": [],
   "author": "",
@@ -39,6 +44,11 @@
     "nodemon": "^1.11.0",
     "ts-mocha": "^1.0.3",
     "tslint": "^5.0.0",
+    "typedoc": "^0.7.1",
+    "typedoc-dash-theme": "^1.1.0",
+    "typedoc-markdown-theme": "0.0.4",
+    "typedoc-plugin-external-module-name": "^1.0.9",
+    "typedoc-plugin-internal-external": "^1.0.9",
     "typescript": "^2.2.2"
   }
 }

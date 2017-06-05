@@ -1,10 +1,9 @@
-import * as assertion from './query/assertion'
-export * from './query/interfaces'
+/**
+ * Component Routing Module
+ */
+
 import * as mock from './mocking'
+export { mock }
 export { ContentMockingService } from './mocking'
-//export * from './query/assertion'
-export * from './query/Query'
-
-export * from './store'
-
-export { assertion, mock }
+export { default as Store } from './store'
+export { default as Query } from './query'

@@ -11,7 +11,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var kio_ng2_1 = require("kio-ng2");
 var _ = require("lodash");
 var media_1 = require("../media");
-var store = require("../../store");
+var store_1 = require("../../store");
 var parseMockingArgs = function (cuid) {
     var _a = cuid.match(/\[(.*)\]/m), m = _a[0], paramSource = _a[1];
     if (!paramSource) {
@@ -29,7 +29,7 @@ var ContentMockingService = (function () {
     function ContentMockingService() {
     }
     ContentMockingService.prototype.getFixtureForComponent = function (componentName) {
-        var item = store.getComponentByName(componentName);
+        var item = store_1.default.getComponentByName(componentName);
         var mockedData = item ? item.fixture : null;
         if (!mockedData)
             return null;

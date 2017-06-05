@@ -1,18 +1,11 @@
-import { KioComponentItem, ItemIterator, ItemFilter, ItemMapper, IndexSymbol } from './interfaces';
+import { KioComponentItem, IndexSymbol } from './interfaces';
 import { KioContent } from 'kio-ng2';
-export declare class ComponentsStore {
-    items: KioComponentItem[];
-    /**
-     * register kio component for component routing
-     * @param {KioComponentItem} item
-     */
-    addItem(item: KioComponentItem): void;
-    addSymbol(indexName: string, indexSymbol: IndexSymbol): void;
-    updateItem(item: KioComponentItem, key: string, value: any): void;
-    filter(filter: ItemFilter): KioComponentItem[];
-    find(filter: ItemFilter): KioComponentItem;
-    getAt(idx: number): KioComponentItem;
-    eachItem(iterator: ItemIterator): void;
-    mapItems(mapper: ItemMapper): any[];
-    findItemForNode(node: KioContent): number;
+import { BasicStore } from './BasicStore.class';
+export declare class ComponentsStore extends BasicStore {
+    registerIndex(indexName: string, indexSymbols: IndexSymbol[]): void;
+    registerComponent(item: KioComponentItem): void;
+    getAllComponents(): KioComponentItem[];
+    getComponentAt(idx: number): KioComponentItem;
+    getComponentByName(componentName: string): KioComponentItem;
+    getComponentIndexForNode(node: KioContent): number;
 }

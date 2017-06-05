@@ -1,82 +1,48 @@
 "use strict";
-var __assign = (this && this.__assign) || Object.assign || function(t) {
-    for (var s, i = 1, n = arguments.length; i < n; i++) {
-        s = arguments[i];
-        for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
-            t[p] = s[p];
-    }
-    return t;
-};
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
 Object.defineProperty(exports, "__esModule", { value: true });
-var Query_1 = require("../query/Query");
-var _ = require("lodash");
-var indexToProp = {
-    "PublicationComponents": "component",
-    "PublicationFixtures": "fixture",
-    "PublicationCriterias": "criteria"
-};
-var emptyItem = {
-    componentName: undefined,
-    component: undefined,
-    fixture: undefined,
-    criteria: undefined
-};
-var normalizeComponentName = function (name) {
-    return name.replace(/Component$/, '');
-};
-var ComponentsStore = (function () {
+var BasicStore_class_1 = require("./BasicStore.class");
+var ComponentsStore = (function (_super) {
+    __extends(ComponentsStore, _super);
     function ComponentsStore() {
-        this.items = [];
+        return _super !== null && _super.apply(this, arguments) || this;
     }
-    /**
-     * register kio component for component routing
-     * @param {KioComponentItem} item
-     */
-    ComponentsStore.prototype.addItem = function (item) {
-        this.items.push(item);
-    };
-    ComponentsStore.prototype.addSymbol = function (indexName, indexSymbol) {
-        var componentName = indexSymbol.componentName, symbol = indexSymbol.symbol;
-        var propKey = indexToProp[indexName];
-        var componentItem = this.find(function (item, idx) { return normalizeComponentName(item.componentName) === normalizeComponentName(componentName); });
-        if (!componentItem) {
-            componentItem = __assign({}, emptyItem, { componentName: normalizeComponentName(componentName) });
-            this.addItem(componentItem);
-        }
-        this.updateItem(componentItem, propKey, symbol);
-    };
-    ComponentsStore.prototype.updateItem = function (item, key, value) {
-        var items = this.items.slice();
-        this.items = items.map(function (mapItem, idx) {
-            if (item !== mapItem)
-                return mapItem;
-            return __assign({}, item, (_a = {}, _a[key] = value, _a));
-            var _a;
+    ComponentsStore.prototype.registerIndex = function (indexName, indexSymbols) {
+        var _this = this;
+        console.log('registerIndex >%s<', indexName);
+        var t = indexSymbols.length + " symbols";
+        console.groupCollapsed(t);
+        console.table(indexSymbols);
+        console.groupEnd();
+        indexSymbols.forEach(function (item) {
+            _this.addSymbol(indexName, item);
         });
     };
-    ComponentsStore.prototype.filter = function (filter) {
-        return _.filter(this.items, filter);
+    ComponentsStore.prototype.registerComponent = function (item) {
+        this.addItem(item);
     };
-    ComponentsStore.prototype.find = function (filter) {
-        return _.find(this.items, filter);
+    ComponentsStore.prototype.getAllComponents = function () {
+        return this.items.slice();
     };
-    ComponentsStore.prototype.getAt = function (idx) {
-        return this.items[idx];
+    ComponentsStore.prototype.getComponentAt = function (idx) {
+        return this.getAt(idx);
     };
-    ComponentsStore.prototype.eachItem = function (iterator) {
-        var clonedList = this.items.slice();
-        this.items.forEach(function (item, idx) { return iterator(item, idx, clonedList); });
+    ComponentsStore.prototype.getComponentByName = function (componentName) {
+        return this.find(function (item, idx, list) { return item.componentName === componentName; });
     };
-    ComponentsStore.prototype.mapItems = function (mapper) {
-        var clonedList = this.items.slice();
-        return this.items.map(function (item, idx) { return mapper(item, idx, clonedList); });
-    };
-    ComponentsStore.prototype.findItemForNode = function (node) {
-        return _.findIndex(this.items, function (item, idx) {
-            return item.criteria && Query_1.matchComponent(item.criteria)(node);
-        });
+    ComponentsStore.prototype.getComponentIndexForNode = function (node) {
+        return this.findItemForNode(node);
     };
     return ComponentsStore;
-}());
+}(BasicStore_class_1.BasicStore));
 exports.ComponentsStore = ComponentsStore;
 //# sourceMappingURL=ComponentsStore.class.js.map
