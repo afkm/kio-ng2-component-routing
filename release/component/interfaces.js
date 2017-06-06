@@ -1,8 +1,8 @@
+"use strict";
 /**
  * @module kio-ng2-component-routing
  * @namespace Components
  */
-"use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var query_1 = require("../query");
 exports.isComponentStructure = function (other) {

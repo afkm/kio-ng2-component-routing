@@ -1,7 +1,7 @@
+"use strict";
 /**
  * @module ContentMocking
  */
-"use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var kio_ng2_1 = require("kio-ng2");
 var _cuid = require('cuid');

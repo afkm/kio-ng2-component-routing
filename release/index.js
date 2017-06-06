@@ -1,7 +1,7 @@
+"use strict";
 /**
  * Component Routing Module
  */
-"use strict";
 function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
@@ -15,4 +15,5 @@ var store_1 = require("./store");
 exports.Store = store_1.default;
 var query_1 = require("./query");
 exports.Query = query_1.default;
+__export(require("./query"));
 //# sourceMappingURL=index.js.map
