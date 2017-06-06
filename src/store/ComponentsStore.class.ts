@@ -4,8 +4,7 @@ import {
   ItemIterator, ItemFilter, ItemMapper,
   IndexSymbol 
 } from './interfaces'
-import { KioContent } from 'kio-ng2'
-
+import { KioContent, KioContentType, KioPrimitiveContentType } from 'kio-ng2'
 
 import { BasicStore } from './BasicStore.class'
 
@@ -42,7 +41,7 @@ export class ComponentsStore extends BasicStore {
     return this.find ( ( item:KioComponentItem, idx:number, list:KioComponentItem[] ):boolean => item.componentName === componentName )
   }
 
-  getComponentIndexForNode( node:KioContent ):number {
+  getComponentIndexForNode<T extends KioPrimitiveContentType>( node:KioContent<T> ):number {
     return this.findItemForNode ( node ) 
   } 
 

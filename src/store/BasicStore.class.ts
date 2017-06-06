@@ -8,7 +8,7 @@ import {
 import { Query } from '../query/Query'
 import * as _ from 'lodash'
 
-import { KioNode, KioFragment, KioContent } from 'kio-ng2'
+import { KioNode, KioFragment, KioContent, KioPrimitiveContentType } from 'kio-ng2'
 
 export const IndexToPropMap = {
   "PublicationComponents": "component",
@@ -97,7 +97,7 @@ export class BasicStore {
     return this.items.map ( ( item:KioComponentItem, idx:number ) => mapper ( item, idx, clonedList ) )
   }
 
-  findItemForNode ( node:KioContent ):number {
+  findItemForNode <T extends KioPrimitiveContentType>( node:KioContent<T> ):number {
     return _.findIndex(this.items, ( item:KioComponentItem, idx:number ):boolean => {
       return item.criteria && Query.matchComponent ( item.criteria ) ( node )
     } )

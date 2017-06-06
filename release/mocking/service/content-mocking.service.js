@@ -10,6 +10,7 @@ var __assign = (this && this.__assign) || Object.assign || function(t) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var kio_ng2_1 = require("kio-ng2");
 var _ = require("lodash");
+var kio_ng2_2 = require("kio-ng2");
 var media_1 = require("../media");
 var store_1 = require("../../store");
 var parseMockingArgs = function (cuid) {
@@ -37,7 +38,7 @@ var ContentMockingService = (function () {
             mockedData = new kio_ng2_1.KioFragmentModel(mockedData);
         }
         else {
-            mockedData = new kio_ng2_1.KioContentModel(mockedData);
+            mockedData = new kio_ng2_1.KioContentModel(mockedData.type, mockedData);
         }
         this.fillContent(mockedData);
         return mockedData;
@@ -61,7 +62,7 @@ var ContentMockingService = (function () {
         if (params === void 0) { params = {}; }
         var mockedData = parseMockingArgs(node.cuid) || {};
         params = __assign({}, params, mockedData);
-        if (node.type === 'txt') {
+        if (node.type === kio_ng2_2.KioNodeType.txt) {
             return __assign({ text: 'Lorem ipsum Eiusmod mollit dolor ut irure incididunt exercitation aliqua proident anim minim velit dolor voluptate commodo incididunt eu et proident commodo proident eu nostrud Duis ea nisi non.' }, params);
         }
         return media_1.renderDataForNode(node, params) || params || {};

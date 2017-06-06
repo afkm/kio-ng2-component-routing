@@ -1,5 +1,5 @@
 import { KioComponentItem, IndexSymbol } from './interfaces';
-import { KioContent } from 'kio-ng2';
+import { KioContent, KioPrimitiveContentType } from 'kio-ng2';
 import { BasicStore } from './BasicStore.class';
 export declare class ComponentsStore extends BasicStore {
     registerIndex(indexName: string, indexSymbols: IndexSymbol[]): void;
@@ -7,5 +7,5 @@ export declare class ComponentsStore extends BasicStore {
     getAllComponents(): KioComponentItem[];
     getComponentAt(idx: number): KioComponentItem;
     getComponentByName(componentName: string): KioComponentItem;
-    getComponentIndexForNode(node: KioContent): number;
+    getComponentIndexForNode<T extends KioPrimitiveContentType>(node: KioContent<T>): number;
 }

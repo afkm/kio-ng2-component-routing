@@ -1,10 +1,11 @@
 import { KioNode } from 'kio-ng2';
+import { KioContentType } from 'kio-ng2';
 import { QueryableAnnotation, QueryableFragmentAnnotation } from './interfaces';
 export interface AnnotationNodeMatcher {
-    (node: KioNode): boolean;
+    <T extends KioContentType>(node: KioNode<T>): boolean;
 }
 export interface AnnotationNodeAssertion {
-    (node: KioNode): string[] | null;
+    <T extends KioContentType>(node: KioNode<T>): string[] | null;
 }
 export declare type ComponentMatchingArgument = QueryableFragmentAnnotation | QueryableAnnotation;
 export declare module Query {

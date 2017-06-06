@@ -1,15 +1,16 @@
 import { KioFragment, KioNode } from 'kio-ng2'
+import { KioContentType, KioPrimitiveContentType, KioNestedContentType } from 'kio-ng2'
 import { QueryableAnnotation, QueryableFragmentAnnotation, isQueryableAnnotation, isQueryableFragmentAnnotation } from './interfaces'
 
 import * as assert from './assertion'
 import * as _ from '@types/lodash'
 
 export interface AnnotationNodeMatcher {
-  ( node:KioNode ):boolean
+  <T extends KioContentType>( node:KioNode<T> ):boolean
 }
 
 export interface AnnotationNodeAssertion {
-  ( node:KioNode ):string[]|null
+  <T extends KioContentType>( node:KioNode<T> ):string[]|null
 }
 
 export type ComponentMatchingArgument = QueryableFragmentAnnotation|QueryableAnnotation
@@ -24,7 +25,7 @@ export module Query {
    * @return     list of assertion messages or null
    */
   export function assertComponent( queryableAnnotation : ComponentMatchingArgument ):AnnotationNodeAssertion {
-    return ( node:KioFragment ) : string[]|null => {
+    return ( node:any ) : string[]|null => {
 
       const messages:string[] = []
 
@@ -57,7 +58,7 @@ export module Query {
   }
 
   export function matchComponent ( componentAnnotation:any ):AnnotationNodeMatcher {
-    return ( node:KioFragment ) => {
+    return ( node:any ) => {
     
       if ( componentAnnotation.type && assert.eq ( componentAnnotation.type ) ( node.type ) === false )
       {

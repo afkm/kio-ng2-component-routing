@@ -26,6 +26,7 @@ exports.mockFragment = function (children, modifiers) {
     if (modifiers === void 0) { modifiers = []; }
     return new kio_ng2_1.KioFragmentModel({
         cuid: exports.cuid(),
+        type: kio_ng2_1.KioNodeType.fragment,
         modifiers: modifiers,
         children: children.map(function (child) {
             if (child.isKioNode)
@@ -54,7 +55,7 @@ exports.mockContent = function (value, modifiers) {
         cuid: exports.cuid.apply(void 0, params),
         locale: 'en_US'
     };
-    var node = new kio_ng2_1.KioContentModel(data);
+    var node = new kio_ng2_1.KioContentModel(typeName, data);
     /*const groupLabel = 'mock content for "'+typeName+'" (' + node.cuid + ')'
     console.groupCollapsed ( groupLabel )
     console.table ( data )

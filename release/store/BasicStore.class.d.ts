@@ -1,5 +1,5 @@
 import { KioComponentItem, ItemIterator, ItemFilter, ItemMapper, IndexSymbol } from './interfaces';
-import { KioContent } from 'kio-ng2';
+import { KioContent, KioPrimitiveContentType } from 'kio-ng2';
 export declare const IndexToPropMap: {
     "PublicationComponents": string;
     "PublicationFixtures": string;
@@ -22,5 +22,5 @@ export declare class BasicStore {
     getAt(idx: number): KioComponentItem;
     eachItem(iterator: ItemIterator): void;
     mapItems(mapper: ItemMapper): any[];
-    findItemForNode(node: KioContent): number;
+    findItemForNode<T extends KioPrimitiveContentType>(node: KioContent<T>): number;
 }
