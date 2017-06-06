@@ -4,7 +4,4 @@ function __export(m) {
 }
 Object.defineProperty(exports, "__esModule", { value: true });
 __export(require("./interfaces"));
-var Query_1 = require("./Query");
-/** Query api */
-exports.default = Query_1.Query;
 //# sourceMappingURL=index.js.map

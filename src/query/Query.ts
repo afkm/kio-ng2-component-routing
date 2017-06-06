@@ -1,5 +1,5 @@
 import { KioFragment, KioNode } from 'kio-ng2'
-import { QueryableAnnotation } from './interfaces'
+import { QueryableAnnotation, QueryableFragmentAnnotation, isQueryableAnnotation, isQueryableFragmentAnnotation } from './interfaces'
 
 import * as assert from './assertion'
 import * as _ from '@types/lodash'
@@ -12,6 +12,8 @@ export interface AnnotationNodeAssertion {
   ( node:KioNode ):string[]|null
 }
 
+export type ComponentMatchingArgument = QueryableFragmentAnnotation|QueryableAnnotation
+
 export module Query {
   /**
    * @brief      component criteria assertion; returns assertion messages, if any issues occur
@@ -21,7 +23,7 @@ export module Query {
    *
    * @return     list of assertion messages or null
    */
-  export function assertComponent( queryableAnnotation : QueryableAnnotation ):AnnotationNodeAssertion {
+  export function assertComponent( queryableAnnotation : ComponentMatchingArgument ):AnnotationNodeAssertion {
     return ( node:KioFragment ) : string[]|null => {
 
       const messages:string[] = []
@@ -40,10 +42,13 @@ export module Query {
 
       const childTypes = (node.children||[]).map(c => c.type)
 
-      if ( queryableAnnotation.childTypes && assert.query ( queryableAnnotation.childTypes ) ( childTypes ) === false )
+      if ( isQueryableFragmentAnnotation(queryableAnnotation) )
       {
-        //console.log('invalid node childTypes' , childTypes , '- component requires: ', componentAnnotation.childTypes )
-        messages.push ( 'invalid node child types "'+childTypes.join(',')+'" for component. Expected: ' + JSON.stringify(queryableAnnotation.childTypes) )
+        if ( assert.query ( queryableAnnotation.childTypes ) ( childTypes ) === false )
+        {
+          //console.log('invalid node childTypes' , childTypes , '- component requires: ', componentAnnotation.childTypes )
+          messages.push ( 'invalid node child types "'+childTypes.join(',')+'" for component. Expected: ' + JSON.stringify(queryableAnnotation.childTypes) )
+        }
       }
 
       return messages.length > 0 ? messages : null

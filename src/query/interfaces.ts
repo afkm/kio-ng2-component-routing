@@ -1,3 +1,4 @@
+import { KioContentType } from 'kio-ng2'
 export interface Predicate { 
   ( arg:any ) : boolean 
 }
@@ -81,6 +82,27 @@ export interface ComponentFixture {
 export interface QueryableAnnotation {
   type:string;
   modifiers?:ListQuery<string>;
-  childTypes?:ListQuery<string>;
   fixture?:ComponentFixture
+}
+
+
+export interface QueryableFragmentAnnotation extends QueryableAnnotation {
+  type:'fragment';
+  childTypes?:ListQuery<string>;
+}
+
+export const isQueryableAnnotation = ( other:any ):other is QueryableAnnotation => {
+  return (
+      'type' in other
+      &&
+      'string' === typeof other.type
+    )
+}
+
+export const isQueryableFragmentAnnotation = ( other:any ):other is QueryableFragmentAnnotation => {
+  return (
+      'childTypes' in other 
+      &&
+      isQueryableAnnotation(other)
+    )
 }

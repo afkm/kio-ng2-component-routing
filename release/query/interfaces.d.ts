@@ -44,6 +44,11 @@ export interface ComponentFixture {
 export interface QueryableAnnotation {
     type: string;
     modifiers?: ListQuery<string>;
-    childTypes?: ListQuery<string>;
     fixture?: ComponentFixture;
 }
+export interface QueryableFragmentAnnotation extends QueryableAnnotation {
+    type: 'fragment';
+    childTypes?: ListQuery<string>;
+}
+export declare const isQueryableAnnotation: (other: any) => other is QueryableAnnotation;
+export declare const isQueryableFragmentAnnotation: (other: any) => other is QueryableFragmentAnnotation;

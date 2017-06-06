@@ -1,11 +1,12 @@
 import { KioNode } from 'kio-ng2';
-import { QueryableAnnotation } from './interfaces';
+import { QueryableAnnotation, QueryableFragmentAnnotation } from './interfaces';
 export interface AnnotationNodeMatcher {
     (node: KioNode): boolean;
 }
 export interface AnnotationNodeAssertion {
     (node: KioNode): string[] | null;
 }
+export declare type ComponentMatchingArgument = QueryableFragmentAnnotation | QueryableAnnotation;
 export declare module Query {
     /**
      * @brief      component criteria assertion; returns assertion messages, if any issues occur
@@ -15,6 +16,6 @@ export declare module Query {
      *
      * @return     list of assertion messages or null
      */
-    function assertComponent(queryableAnnotation: QueryableAnnotation): AnnotationNodeAssertion;
+    function assertComponent(queryableAnnotation: ComponentMatchingArgument): AnnotationNodeAssertion;
     function matchComponent(componentAnnotation: any): AnnotationNodeMatcher;
 }

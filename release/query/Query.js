@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+var interfaces_1 = require("./interfaces");
 var assert = require("./assertion");
 var Query;
 (function (Query) {
@@ -23,9 +24,11 @@ var Query;
                 messages.push('invalid node modifiers "' + node.modifiers.join(',') + '" for component');
             }
             var childTypes = (node.children || []).map(function (c) { return c.type; });
-            if (queryableAnnotation.childTypes && assert.query(queryableAnnotation.childTypes)(childTypes) === false) {
-                //console.log('invalid node childTypes' , childTypes , '- component requires: ', componentAnnotation.childTypes )
-                messages.push('invalid node child types "' + childTypes.join(',') + '" for component. Expected: ' + JSON.stringify(queryableAnnotation.childTypes));
+            if (interfaces_1.isQueryableFragmentAnnotation(queryableAnnotation)) {
+                if (assert.query(queryableAnnotation.childTypes)(childTypes) === false) {
+                    //console.log('invalid node childTypes' , childTypes , '- component requires: ', componentAnnotation.childTypes )
+                    messages.push('invalid node child types "' + childTypes.join(',') + '" for component. Expected: ' + JSON.stringify(queryableAnnotation.childTypes));
+                }
             }
             return messages.length > 0 ? messages : null;
         };
