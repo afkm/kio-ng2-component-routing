@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var interfaces_1 = require("./interfaces");
-var assert = require("./assertion");
+const interfaces_1 = require("./interfaces");
+const assert = require("./assertion");
 var Query;
 (function (Query) {
     /**
@@ -13,8 +13,8 @@ var Query;
      * @return     list of assertion messages or null
      */
     function assertComponent(queryableAnnotation) {
-        return function (node) {
-            var messages = [];
+        return (node) => {
+            const messages = [];
             if (queryableAnnotation.type && assert.eq(queryableAnnotation.type)(node.type) === false) {
                 //console.log('invalid node type ' , node.type , ' - component requires: ' , queryableAnnotation.type )
                 messages.push('invalid node type "' + node.type + '" for component');
@@ -23,7 +23,7 @@ var Query;
                 //console.log('invalid node modifiers' , node.modifiers , '- component requires: ', queryableAnnotation.modifiers )
                 messages.push('invalid node modifiers "' + node.modifiers.join(',') + '" for component');
             }
-            var childTypes = (node.children || []).map(function (c) { return c.type; });
+            const childTypes = (node.children || []).map(c => c.type);
             if (interfaces_1.isQueryableFragmentAnnotation(queryableAnnotation)) {
                 if (assert.query(queryableAnnotation.childTypes)(childTypes) === false) {
                     //console.log('invalid node childTypes' , childTypes , '- component requires: ', componentAnnotation.childTypes )
@@ -35,7 +35,7 @@ var Query;
     }
     Query.assertComponent = assertComponent;
     function matchComponent(componentAnnotation) {
-        return function (node) {
+        return (node) => {
             if (componentAnnotation.type && assert.eq(componentAnnotation.type)(node.type) === false) {
                 //console.log('invalid node type ' , node.type , ' - component requires: ' , componentAnnotation.type )
                 return false;
@@ -44,7 +44,7 @@ var Query;
                 //console.log('invalid node modifiers' , node.modifiers , '- component requires: ', componentAnnotation.modifiers )
                 return false;
             }
-            var childTypes = (node.children || []).map(function (c) { return c.type; });
+            const childTypes = (node.children || []).map(c => c.type);
             if (componentAnnotation.childTypes && assert.query(componentAnnotation.childTypes)(childTypes) === false) {
                 //console.log('invalid node childTypes' , childTypes , '- component requires: ', componentAnnotation.childTypes )
                 return false;

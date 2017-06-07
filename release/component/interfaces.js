@@ -4,29 +4,29 @@
  * @namespace Components
  */
 Object.defineProperty(exports, "__esModule", { value: true });
-var query_1 = require("../query");
-exports.isComponentStructure = function (other) {
+const query_1 = require("../query");
+exports.isComponentStructure = (other) => {
     return query_1.isQueryableAnnotation(other);
 };
-exports.isComponentFragmentStructure = function (other) {
+exports.isComponentFragmentStructure = (other) => {
     return ('childTypes' in other
         &&
             query_1.isQueryableFragmentAnnotation(other));
 };
-exports.isNamedAnnotation = function (other) {
+exports.isNamedAnnotation = (other) => {
     return ('name' in other);
 };
-exports.isNamedComponentStructure = function (other) {
+exports.isNamedComponentStructure = (other) => {
     return (exports.isNamedAnnotation(other)
         &&
             exports.isComponentStructure(other));
 };
-exports.isNamedFragmentComponentStructure = function (other) {
+exports.isNamedFragmentComponentStructure = (other) => {
     return (exports.isNamedAnnotation(other)
         &&
             exports.isComponentFragmentStructure(other));
 };
-exports.isNamedComponent = function (other) {
+exports.isNamedComponent = (other) => {
     return exports.isNamedComponentStructure(other) || exports.isNamedFragmentComponentStructure(other);
 };
 //# sourceMappingURL=interfaces.js.map

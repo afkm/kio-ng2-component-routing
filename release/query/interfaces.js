@@ -1,11 +1,11 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.isQueryableAnnotation = function (other) {
+exports.isQueryableAnnotation = (other) => {
     return ('type' in other
         &&
             'string' === typeof other.type);
 };
-exports.isQueryableFragmentAnnotation = function (other) {
+exports.isQueryableFragmentAnnotation = (other) => {
     return ('childTypes' in other
         &&
             exports.isQueryableAnnotation(other));

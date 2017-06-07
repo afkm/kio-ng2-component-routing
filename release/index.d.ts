@@ -7,4 +7,4 @@ export { ContentMockingService } from './mocking';
 export * from './component';
 export { default as Store } from './store';
 export { default as Query } from './query';
-export * from './query';
+export * from './query/interfaces';

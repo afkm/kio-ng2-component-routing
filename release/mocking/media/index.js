@@ -1,13 +1,13 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var imageType = require("./image");
-var mediaTypes = [
+const imageType = require("./image");
+const mediaTypes = [
     { name: 'image', type: imageType }
 ];
 function renderDataForNode(node, params) {
-    var mediaType = mediaTypes.find(function (mediaType) { return mediaType.type.matchNode(node); });
+    const mediaType = mediaTypes.find(mediaType => mediaType.type.matchNode(node));
     if (mediaType) {
-        var meta = mediaType.type.mockMeta(Object.assign({}, params, { filename: node.cuid }));
+        const meta = mediaType.type.mockMeta(Object.assign({}, params, { filename: node.cuid }));
         return {
             meta: meta,
             url: mediaType.type.renderDataURL(meta)

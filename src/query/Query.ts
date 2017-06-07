@@ -1,6 +1,11 @@
 import { KioFragment, KioNode } from 'kio-ng2'
 import { KioContentType, KioPrimitiveContentType, KioNestedContentType } from 'kio-ng2'
-import { QueryableAnnotation, QueryableFragmentAnnotation, isQueryableAnnotation, isQueryableFragmentAnnotation } from './interfaces'
+import { 
+  QueryableAnnotation, QueryableFragmentAnnotation, isQueryableAnnotation, isQueryableFragmentAnnotation,
+  ListQuery
+} from './interfaces'
+
+import { parse as parseListQuery } from './list/ListQuery'
 
 import * as assert from './assertion'
 import * as _ from '@types/lodash'
