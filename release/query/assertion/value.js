@@ -1,21 +1,21 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.eq = function (value) {
+exports.eq = (value) => {
     if (value && 'function' === typeof value.test)
         return value.test.bind(value);
-    return function (otherValue) { return value === otherValue; };
+    return (otherValue) => value === otherValue;
 };
-exports.gt = function (value) { return function (otherValue) { return otherValue > value; }; };
-exports.gte = function (value) { return function (otherValue) { return otherValue >= value; }; };
-exports.lt = function (value) { return function (otherValue) { return otherValue < value; }; };
-exports.lte = function (value) { return function (otherValue) { return otherValue <= value; }; };
-exports.match = function (value) {
+exports.gt = (value) => (otherValue) => otherValue > value;
+exports.gte = (value) => (otherValue) => otherValue >= value;
+exports.lt = (value) => (otherValue) => otherValue < value;
+exports.lte = (value) => (otherValue) => otherValue <= value;
+exports.match = (value) => {
     if ('string' === typeof value) {
         return exports.eq(value);
     }
     return value.test.bind(value);
 };
-exports.getFilter = function (filter) {
+exports.getFilter = (filter) => {
     if ('function' !== typeof filter) {
         return exports.eq(filter);
     }

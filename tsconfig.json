@@ -16,7 +16,7 @@
     "noFallthroughCasesInSwitch": false,
     "skipLibCheck": true,
     "outDir": "release",
-    "target": "es5",
+    "target": "es6",
     "typeRoots": ["node_modules/@types"],
     "lib": [
         "es5",
@@ -27,5 +27,6 @@
         "dom"
     ]
   },
-  "files": [ "./src/index.ts" ]
+  "files": [ "./src/index.ts" ],
+  "includes": [ "./src/**/*.ts" ]
 }

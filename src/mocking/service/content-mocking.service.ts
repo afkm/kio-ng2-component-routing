@@ -1,6 +1,6 @@
 import { KioNode, KioNodeModel, KioContentModel, KioFragmentModel } from 'kio-ng2'
 import * as _ from 'lodash'
-import { KioTxtData, KioSrcData } from 'kio-ng2'
+import { KioTxtData, KioSrcData, KioNodeType } from 'kio-ng2'
 import { renderDataForNode } from '../media'
 import store from '../../store'
 
@@ -40,7 +40,7 @@ export class ContentMockingService {
     }
     else 
     {
-      mockedData = new KioContentModel ( mockedData )
+      mockedData = new KioContentModel ( mockedData.type, mockedData )
     }
     this.fillContent ( mockedData )
     return mockedData
@@ -67,10 +67,10 @@ export class ContentMockingService {
 
   }
 
-  mockContentData ( node : KioNode, params:MockedData={} ):any {
+  mockContentData <T extends KioNodeType>( node : KioNode<T>, params:MockedData={} ):any {
     const mockedData = parseMockingArgs ( node.cuid ) || {}
     params = {...params , ...mockedData }
-    if ( node.type === 'txt' )
+    if ( node.type === KioNodeType.txt )
     {
       return {
         text: 'Lorem ipsum Eiusmod mollit dolor ut irure incididunt exercitation aliqua proident anim minim velit dolor voluptate commodo incididunt eu et proident commodo proident eu nostrud Duis ea nisi non.',

@@ -1,4 +1,5 @@
 import { KioNode } from 'kio-ng2';
+import { KioNodeType } from 'kio-ng2';
 export interface MockedData {
     [key: string]: any;
 }
@@ -7,5 +8,5 @@ export declare class ContentMockingService {
     getFixtureForComponent(componentName: string): any;
     fillContent(node: any): void;
     mockLoadNodeContent(node: any, params?: any): void;
-    mockContentData(node: KioNode, params?: MockedData): any;
+    mockContentData<T extends KioNodeType>(node: KioNode<T>, params?: MockedData): any;
 }

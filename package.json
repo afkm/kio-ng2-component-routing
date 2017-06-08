@@ -16,7 +16,7 @@
     "preversion": "npm run build",
     "dev:watch": "nodemon -w ./src -e ts --exec \"npm run build\"",
     "prebuild:release": "rm -rf ./release",
-    "test": "ts-mocha ./src/**/*.spec.ts",
+    "test": "ts-mocha ./src/module.spec.ts",
     "test:watch": "./scripts/watch.sh test",
     "test:fixture": "ts-mocha ./src/fixture/fixture.spec.ts",
     "test:fixture:watch": "./scripts/watch.sh test:fixture",
@@ -30,7 +30,7 @@
   "dependencies": {
     "@types/cuid": "0.0.30",
     "@types/lodash": "^4.14.62",
-    "@types/node": "^7.0.12",
+    "@types/node": "^7.0.28",
     "cuid": "^1.3.8",
     "kio-ng2": "github:afkmatze/kio-ng2",
     "lodash": "^4.17.4",
@@ -40,7 +40,9 @@
   "devDependencies": {
     "@types/mocha": "^2.2.41",
     "ceylon": "^0.9.1",
-    "mocha": "^3.3.0",
+    "chai": "^4.0.2",
+    "jasmine": "^2.6.0",
+    "mocha": "^3.4.2",
     "nodemon": "^1.11.0",
     "ts-mocha": "^1.0.3",
     "tslint": "^5.0.0",

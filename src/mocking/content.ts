@@ -2,7 +2,7 @@
  * @module ContentMocking
  */
 
-import { KioContentModel, KioFragmentModel } from 'kio-ng2'
+import { KioContentModel, KioFragmentModel, KioNodeType } from 'kio-ng2'
 declare const require
 const _cuid = require('cuid')
 
@@ -25,6 +25,7 @@ export const cuid = ( ...params ):string => {
 export const mockFragment = ( children:any[], modifiers:string[]=[] ) => {
   return new KioFragmentModel ( {
     cuid: cuid() ,
+    type: KioNodeType.fragment,
     modifiers ,
     children: children.map ( child => {
       if ( child.isKioNode )
@@ -45,7 +46,7 @@ export const mockContentFromString = ( selector:string ) => {
 }
 
 
-export const mockContent = ( value:string, modifiers:string[]=[] ) => {
+export const mockContent = <T extends KioNodeType>( value:string, modifiers:string[]=[] ) => {
   const [ typeName , typeModifiers=[] , typeParams='' ] = parse ( value )  
   const params = typeParams.slice(1,-1)
                     .split(';')
@@ -58,7 +59,7 @@ export const mockContent = ( value:string, modifiers:string[]=[] ) => {
     cuid: cuid(...params) , 
     locale: 'en_US'
   }
-  const node = new KioContentModel ( data )
+  const node = new KioContentModel( typeName, data )
   /*const groupLabel = 'mock content for "'+typeName+'" (' + node.cuid + ')'
   console.groupCollapsed ( groupLabel )
   console.table ( data )

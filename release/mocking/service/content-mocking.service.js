@@ -1,72 +1,60 @@
 "use strict";
-var __assign = (this && this.__assign) || Object.assign || function(t) {
-    for (var s, i = 1, n = arguments.length; i < n; i++) {
-        s = arguments[i];
-        for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
-            t[p] = s[p];
-    }
-    return t;
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-var kio_ng2_1 = require("kio-ng2");
-var _ = require("lodash");
-var media_1 = require("../media");
-var store_1 = require("../../store");
-var parseMockingArgs = function (cuid) {
-    var _a = cuid.match(/\[(.*)\]/m), m = _a[0], paramSource = _a[1];
+const kio_ng2_1 = require("kio-ng2");
+const _ = require("lodash");
+const kio_ng2_2 = require("kio-ng2");
+const media_1 = require("../media");
+const store_1 = require("../../store");
+const parseMockingArgs = (cuid) => {
+    const [m, paramSource] = cuid.match(/\[(.*)\]/m);
     if (!paramSource) {
         return null;
     }
-    var params = paramSource.split('][').slice(1).filter(function (v) { return !!v; }).map(function (tupel) { return tupel.split('='); });
+    const params = paramSource.split('][').slice(1).filter(v => !!v).map(tupel => tupel.split('='));
     if (params.length === 0)
         return null;
     /*console.log ( 'mocking params' )
     console.table ( params )*/
-    var z = _.zip.apply(_, params);
+    const z = _.zip(...params);
     return _.zipObject(z[0], z[1]);
 };
-var ContentMockingService = (function () {
-    function ContentMockingService() {
-    }
-    ContentMockingService.prototype.getFixtureForComponent = function (componentName) {
-        var item = store_1.default.getComponentByName(componentName);
-        var mockedData = item ? item.fixture : null;
+class ContentMockingService {
+    constructor() { }
+    getFixtureForComponent(componentName) {
+        const item = store_1.default.getComponentByName(componentName);
+        let mockedData = item ? item.fixture : null;
         if (!mockedData)
             return null;
         if (mockedData.type === 'fragment') {
             mockedData = new kio_ng2_1.KioFragmentModel(mockedData);
         }
         else {
-            mockedData = new kio_ng2_1.KioContentModel(mockedData);
+            mockedData = new kio_ng2_1.KioContentModel(mockedData.type, mockedData);
         }
         this.fillContent(mockedData);
         return mockedData;
-    };
-    ContentMockingService.prototype.fillContent = function (node) {
-        var _this = this;
+    }
+    fillContent(node) {
         if (node.type === 'fragment') {
-            (node.children || []).forEach(function (childNode) {
-                _this.fillContent(childNode);
+            (node.children || []).forEach(childNode => {
+                this.fillContent(childNode);
             });
         }
         else {
             node.data = this.mockContentData(node);
         }
-    };
-    ContentMockingService.prototype.mockLoadNodeContent = function (node, params) {
-        if (params === void 0) { params = {}; }
+    }
+    mockLoadNodeContent(node, params = {}) {
         node.data = this.mockContentData(node, params);
-    };
-    ContentMockingService.prototype.mockContentData = function (node, params) {
-        if (params === void 0) { params = {}; }
-        var mockedData = parseMockingArgs(node.cuid) || {};
-        params = __assign({}, params, mockedData);
-        if (node.type === 'txt') {
-            return __assign({ text: 'Lorem ipsum Eiusmod mollit dolor ut irure incididunt exercitation aliqua proident anim minim velit dolor voluptate commodo incididunt eu et proident commodo proident eu nostrud Duis ea nisi non.' }, params);
+    }
+    mockContentData(node, params = {}) {
+        const mockedData = parseMockingArgs(node.cuid) || {};
+        params = Object.assign({}, params, mockedData);
+        if (node.type === kio_ng2_2.KioNodeType.txt) {
+            return Object.assign({ text: 'Lorem ipsum Eiusmod mollit dolor ut irure incididunt exercitation aliqua proident anim minim velit dolor voluptate commodo incididunt eu et proident commodo proident eu nostrud Duis ea nisi non.' }, params);
         }
         return media_1.renderDataForNode(node, params) || params || {};
-    };
-    return ContentMockingService;
-}());
+    }
+}
 exports.ContentMockingService = ContentMockingService;
 //# sourceMappingURL=content-mocking.service.js.map
