@@ -1,4 +1,4 @@
-import { ListQuery, ValueTest, numberMatcher, listMatcher } from '../interfaces';
+import { ListQuery, ValueTest, listMatcher, MatchParam, Longish } from '../interfaces';
 /**
  * requires {filter} to match each element of {otherValues}
  * all ( 'txt' ) ( [ 'txt' , 'txt' , 'txt' ] ) -> true
@@ -31,8 +31,9 @@ export declare const containsNot: listMatcher<any>;
  * @type {listMatcher<any>}
  */
 export declare const deepEqual: listMatcher<any>;
+export declare function isLongish<T>(other: any): other is Longish<T>;
 /**
  * @param {[type]} otherValues.length [description]
  */
-export declare const hasLength: (length: numberMatcher) => (otherValues: any[]) => ValueTest<number>;
-export declare const query: (listQuery: any[] | ListQuery<any>) => any;
+export declare const hasLength: <T extends Longish<any>>(length: MatchParam<number>) => ValueTest<T>;
+export declare const query: <T>(listQuery: ListQuery<T> | T[]) => any;

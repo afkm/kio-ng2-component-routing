@@ -63,17 +63,32 @@ exports.deepEqual = function (values) { return function (otherValues) {
     return false;
     //return !values.find ( ( value , idx ) => idx !== otherValues.indexOf(value)  )
 }; };
+function isLongish(other) {
+    return ('length' in other);
+}
+exports.isLongish = isLongish;
 /**
  * @param {[type]} otherValues.length [description]
  */
-exports.hasLength = function (length) { return function (otherValues) { return length(otherValues.length); }; };
+exports.hasLength = function (length) {
+    if ('number' === typeof length) {
+        return function (other) {
+            return other.length === length;
+        };
+    }
+    return function (other) { return length(other.length); };
+};
 exports.query = function (listQuery) {
     if (Array.isArray(listQuery)) {
         return exports.query({ deepEqual: listQuery });
     }
     var assertions = [];
-    if (listQuery.length)
-        assertions.push(exports.hasLength(value_1.getFilter(listQuery.length)));
+    if (isLongish(listQuery)) {
+        if ('function' === typeof listQuery.length) {
+            assertions.push(exports.hasLength(listQuery.length));
+        }
+        assertions.push(exports.hasLength(listQuery.length));
+    }
     if (listQuery.contains)
         assertions.push(exports.contains(listQuery.contains));
     if (listQuery.containsNot)

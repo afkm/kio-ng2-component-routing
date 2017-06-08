@@ -1,10 +1,15 @@
 export interface Predicate {
     (arg: any): boolean;
 }
+export interface Longish<T> {
+    length: T;
+}
 export interface Range<T> {
     min?: T;
     max?: T;
 }
+export declare type ValueParam<T> = T | T[];
+export declare type MatchParam<T> = T | ValueTest<T>;
 export declare type ListValue = any[];
 export interface ValueQuery<T> {
     eq?: T;
@@ -22,7 +27,7 @@ export interface ValueTest<T> {
 export interface valueMatcher<T> {
     (value: T): ValueTest<T>;
 }
-export interface numberMatcher {
+export interface numberMatcher extends valueMatcher<number> {
     (value: number): ValueTest<number>;
 }
 export interface stringMatcher extends valueMatcher<string | RegExp> {
