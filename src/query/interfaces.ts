@@ -2,10 +2,18 @@ export interface Predicate {
   ( arg:any ) : boolean 
 }
 
+export interface Longish<T> {
+  length:T
+}
+
 export interface Range<T> {
   min?:T;
   max?:T;
 }
+
+export type ValueParam<T> = T|T[]
+
+export type MatchParam<T> = T|ValueTest<T>
 
 export type ListValue = any[]
 //export type ListCriteria = ListValue|ListQuery

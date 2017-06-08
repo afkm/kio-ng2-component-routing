@@ -10,7 +10,7 @@ import {
   valueFilter
 } from '../interfaces'
 
-export const eq = <T>( value:T ) => {
+export const eq = <T>( value:T ):ValueTest<T> => {
   /*if ( value && 'function' === typeof value.test )
     return value.test.bind ( value )*/
   return function matcher <K extends T>( otherValue:K ) {
@@ -19,6 +19,7 @@ export const eq = <T>( value:T ) => {
     return value === otherValue
   }
 }
+
 export const gt : numberMatcher = ( value:number ) => ( otherValue :number ) => otherValue > value
 export const gte : numberMatcher = ( value:number ) => ( otherValue :number ) => otherValue >= value
 export const lt : numberMatcher = ( value:number ) => ( otherValue :number ) => otherValue < value
@@ -48,16 +49,8 @@ export const isValueMatcher = <T>( other:any ):other is valueMatcher<T> => {
   )
 }
 
-export const getMatcher = <T>( value:T|valueMatcher<T> ):valueMatcher<T> => {
-  if ( isValueMatcher(value) )
-  {
-    return value
-  }
-
-  return eq(value)
-}
-
-export const getFilter = <T>( filter:valueFilter<T>|T ):valueFilter<T> => {
+export function getFilter <T>( filter:T ):valueFilter<T>
+export function getFilter <T>( filter:T|valueFilter<T> ):valueFilter<T> {
   if ( isValueFilter ( filter ) )
   {
     return filter 

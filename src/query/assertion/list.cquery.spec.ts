@@ -77,5 +77,9 @@ describe('test assertion',()=>{
     testMatcher('query',{
       length: assert.lt(3)
     },[42])
+
+    testMatcher('query',{
+      length: assert.gt(0)
+    },[42])    
   } )
 })

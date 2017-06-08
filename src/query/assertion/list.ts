@@ -7,7 +7,10 @@ import {
   numberMatcher ,
   stringMatcher ,
   listMatcher ,
-  valueFilter
+  valueFilter,
+  ValueParam,
+  MatchParam,
+  Longish
 } from '../interfaces'
 import { getFilter, eq, isValueFilter } from './value'
 
@@ -82,23 +85,37 @@ export const deepEqual : listMatcher<any> = ( values:any[] ) => ( otherValues:an
   //return !values.find ( ( value , idx ) => idx !== otherValues.indexOf(value)  )
 }
 
+export function isLongish <T>( other:any ):other is Longish<T> {
+  return ('length' in other)
+}
+
 /**
  * @param {[type]} otherValues.length [description]
  */
-export const hasLength = ( length:numberMatcher ) => ( otherValues:any[] ):ValueTest<number> => length(otherValues.length)
+export const hasLength = <T extends Longish<any>>( length:MatchParam<number> ):ValueTest<T> => {
+  if ( 'number' === typeof length )
+  {
+    return ( other:T ):boolean => {
+      return other.length === length
+    }
+  }
+  return ( other:T ) => length(other.length)
+}
 
 
-export const query = ( listQuery:ListQuery<any>|any[] ) => {
+export const query = <T>( listQuery:ListQuery<T>|T[] ) => {
   if ( Array.isArray ( listQuery ) )
   {
     return query ( {deepEqual: listQuery} )
   }
   const assertions = []
-  if ( 'length' in listQuery )
+  if ( isLongish(listQuery) )
   {
-    const length = listQuery.length
-    const filter:valueFilter<number> = isValueFilter(length) ? length : getFilter ( length )
-    assertions.push ( hasLength( filter ) )
+    if ( 'function' === typeof listQuery.length )
+    {
+      assertions.push ( hasLength( <any>listQuery.length ) )
+    }
+    assertions.push ( hasLength( <number>listQuery.length ) )
   }
   
   if ( listQuery.contains )
