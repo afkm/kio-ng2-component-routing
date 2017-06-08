@@ -9,7 +9,7 @@ import {
   listMatcher ,
   valueFilter
 } from '../interfaces'
-import { getFilter, eq } from './value'
+import { getFilter, eq, isValueFilter } from './value'
 
 /**
  * requires {filter} to match each element of {otherValues}
@@ -94,8 +94,12 @@ export const query = ( listQuery:ListQuery<any>|any[] ) => {
     return query ( {deepEqual: listQuery} )
   }
   const assertions = []
-  if ( listQuery.length )
-    assertions.push ( hasLength(getFilter(listQuery.length)) )
+  if ( 'length' in listQuery )
+  {
+    const length = listQuery.length
+    const filter:valueFilter<number> = isValueFilter(length) ? length : getFilter ( length )
+    assertions.push ( hasLength( filter ) )
+  }
   
   if ( listQuery.contains )
     assertions.push ( contains(listQuery.contains) )

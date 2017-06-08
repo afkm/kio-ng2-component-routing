@@ -30,7 +30,7 @@ export interface valueMatcher<T> {
   (value:T):ValueTest<T>
 }
 
-export interface numberMatcher {
+export interface numberMatcher extends valueMatcher<number> {
   (value:number):ValueTest<number>
 }
 

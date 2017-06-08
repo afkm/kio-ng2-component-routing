@@ -37,6 +37,7 @@ export interface ListQuery<T> extends ValueQuery<ListValue> {
     containsNot?: valueFilter<T>;
     all?: valueFilter<T>;
     deepEqual?: T[];
+    either?: T[];
 }
 export interface ComponentFixture {
     matching: any;

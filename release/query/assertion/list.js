@@ -12,6 +12,9 @@ exports.all = function (filter) { return function (otherValues) {
         return false;
     return otherValues.filter(value_1.getFilter(filter)).length === otherValues.length;
 }; };
+exports.either = function (filterValues) { return function (values) {
+    return filterValues.findIndex(function (filterValue) { return values.indexOf(filterValue) > -1; }) > -1;
+}; };
 /**
  * requires all values of {value} to be in {listValue}
  * @type {listMatcher<any>}

@@ -14,5 +14,6 @@ exports.contains = list_1.contains;
 exports.containsNot = list_1.containsNot;
 exports.deepEqual = list_1.deepEqual;
 exports.hasLength = list_1.hasLength;
+exports.either = list_1.either;
 exports.query = list_1.query;
 //# sourceMappingURL=index.js.map

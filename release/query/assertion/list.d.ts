@@ -6,6 +6,7 @@ import { ListQuery, ValueTest, numberMatcher, listMatcher } from '../interfaces'
  * all ( 'txt' ) ( [ 'txt' , 'txt' , 'txt', 'src' ] ) -> true
  */
 export declare const all: listMatcher<any>;
+export declare const either: <T>(filterValues: T[]) => (values: T[]) => boolean;
 /**
  * requires all values of {value} to be in {listValue}
  * @type {listMatcher<any>}
