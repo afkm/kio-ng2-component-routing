@@ -23,6 +23,10 @@ export const all : listMatcher<any> = ( filter:valueFilter<any> ) => ( otherValu
   return otherValues.filter ( getFilter(filter) ).length === otherValues.length
 }
 
+export const either = <T> ( filterValues:T[] ) => ( values:T[] ) => {
+  return filterValues.findIndex ( filterValue => values.indexOf(filterValue) > -1 ) > -1
+}
+
 /**
  * requires all values of {value} to be in {listValue}
  * @type {listMatcher<any>}

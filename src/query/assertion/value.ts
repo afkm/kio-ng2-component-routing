@@ -28,7 +28,7 @@ export const match : stringMatcher = ( value:string|RegExp ) => {
   return value.test.bind(value)
 }
 
-export const getFilter : valueFilter<any> = ( filter:valueFilter<any> ) => {
+export const getFilter = <T>( filter:valueFilter<T> ) => {
   if ( 'function' !== typeof filter )
   {
     return eq ( filter )

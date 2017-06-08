@@ -72,6 +72,10 @@ export interface ListQuery<T> extends ValueQuery<ListValue> {
   // [ a, b ] ne [ a, b, c ]
   // [ a, b ] ne [ b, a ]
   deepEqual?:T[]
+
+  // either ( list )
+  // requires one value in list 
+  either?:T[]
 }
 
 export interface ComponentFixture {

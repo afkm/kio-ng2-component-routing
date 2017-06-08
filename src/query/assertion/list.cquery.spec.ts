@@ -1,3 +1,5 @@
+import 'mocha'
+import expect from 'ceylon'
 import * as assert from './'
 
 const wrapVal = ( val ) => {
@@ -53,6 +55,12 @@ describe('test assertion',()=>{
     describe('containsNot', () => {
       testMatcher('containsNot','boo',['bar','foo'])
       testMatcher('containsNot','foo',['bar','foo'],false)
+    })
+
+    describe('either', () => {
+      testMatcher('either',['bar'],['bar','foo'])
+      testMatcher('either',['foo'],['bar','foo'])
+      testMatcher('either',['boo'],['bar','foo'],false)
     })
   })
 

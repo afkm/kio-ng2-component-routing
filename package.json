@@ -16,6 +16,8 @@
     "prebuild:release": "rm -rf ./release",
     "test": "ts-mocha ./src/**/*.spec.ts",
     "test:watch": "./scripts/watch.sh test",
+    "test:assertion": "ts-mocha ./src/query/assertion/*.spec.ts",
+    "test:assertion:watch": "./scripts/watch.sh test:assertion",
     "test:fixture": "ts-mocha ./src/fixture/fixture.spec.ts",
     "test:fixture:watch": "./scripts/watch.sh test:fixture"
   },

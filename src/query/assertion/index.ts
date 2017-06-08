@@ -14,6 +14,7 @@ import {
   containsNot ,
   deepEqual ,
   hasLength ,
+  either,
   query
 } from './list'
 
@@ -26,6 +27,7 @@ export {
   lte ,
   match ,
   getFilter,
+  either,
   all ,
   contains ,
   containsNot ,
