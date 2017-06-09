@@ -1,4 +1,6 @@
 import { KioContentModel, KioFragmentModel } from 'kio-ng2'
+import { MockingParams, MockedData, format as formatArgs, parse as parseArgs } from './args'
+
 declare const require
 const _cuid = require('cuid')
 
@@ -61,4 +63,12 @@ export const mockContent = ( value:string, modifiers:string[]=[] ) => {
   console.table ( data )
   console.groupEnd ()*/
   return node
+}
+
+export const mockContentWithArgs = ( contentType:'src'|'txt', modifiers:string[], args:MockingParams ):KioContentModel => {
+  return new KioContentModel({
+    type: contentType, 
+    cuid: cuid(formatArgs ( args )),
+    modifiers
+  })
 }

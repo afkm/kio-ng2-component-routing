@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var kio_ng2_1 = require("kio-ng2");
+var args_1 = require("./args");
 var _cuid = require('cuid');
 var parseModifiers = function (value) { return (value.match(/\.(\w+)/gm) || []).map(function (v) { return v.substr(1); }); };
 var parseTypeName = function (value) { return (value.match(/^\w+/) || [])[0]; };
@@ -57,5 +58,12 @@ exports.mockContent = function (value, modifiers) {
     console.table ( data )
     console.groupEnd ()*/
     return node;
+};
+exports.mockContentWithArgs = function (contentType, modifiers, args) {
+    return new kio_ng2_1.KioContentModel({
+        type: contentType,
+        cuid: exports.cuid(args_1.format(args)),
+        modifiers: modifiers
+    });
 };
 //# sourceMappingURL=content.js.map
