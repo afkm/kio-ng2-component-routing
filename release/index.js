@@ -5,11 +5,15 @@ function __export(m) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var assertion = require("./query/assertion");
 exports.assertion = assertion;
+__export(require("./query/interfaces"));
 var mock = require("./mocking");
 exports.mock = mock;
 var mocking_1 = require("./mocking");
 exports.ContentMockingService = mocking_1.ContentMockingService;
 //export * from './query/assertion'
 __export(require("./query/Query"));
+var Query = require("./query/Query");
+exports.Query = Query;
+__export(require("./component"));
 __export(require("./store"));
 //# sourceMappingURL=index.js.map

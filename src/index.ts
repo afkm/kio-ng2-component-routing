@@ -4,7 +4,9 @@ import * as mock from './mocking'
 export { ContentMockingService } from './mocking'
 //export * from './query/assertion'
 export * from './query/Query'
+import * as Query from './query/Query'
+export * from './component'
 
 export * from './store'
 
-export { assertion, mock }
+export { Query, assertion, mock }
