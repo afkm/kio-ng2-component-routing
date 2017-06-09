@@ -118,6 +118,9 @@ export const query = <T>( listQuery:ListQuery<T>|T[] ) => {
     assertions.push ( hasLength( <number>listQuery.length ) )
   }
   
+  if ( listQuery.either )
+    assertions.push ( either(listQuery.either) )
+
   if ( listQuery.contains )
     assertions.push ( contains(listQuery.contains) )
 

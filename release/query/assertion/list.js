@@ -89,6 +89,8 @@ exports.query = function (listQuery) {
         }
         assertions.push(exports.hasLength(listQuery.length));
     }
+    if (listQuery.either)
+        assertions.push(exports.either(listQuery.either));
     if (listQuery.contains)
         assertions.push(exports.contains(listQuery.contains));
     if (listQuery.containsNot)
