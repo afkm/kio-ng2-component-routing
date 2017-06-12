@@ -1,5 +1,11 @@
 export * from './service/content-mocking.service';
 export * from './content';
+export declare const mockContentWithArgs: <T extends {}>(nodeType: string, data: T) => {
+    cuid: string;
+    locale: string;
+    type: string;
+    modifiers: string[];
+};
 /**
  * arg = ['txt.heading','src.image']
  * arg = ['txt.heading',['src.big-image','txt.paragraph']]

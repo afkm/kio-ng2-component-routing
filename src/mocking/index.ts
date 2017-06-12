@@ -2,9 +2,21 @@ export * from './service/content-mocking.service'
 export * from './content'
 
 import { cuid } from './content'
+import { format as formatArgs } from './args'
 
-import { KioContentModel, KioFragmentModel, KioNodeModel } from 'kio-ng2'
+import { KioContentModel, KioFragmentModel, KioNodeModel, KioNode, KioContent } from 'kio-ng2'
 
+export const mockContentWithArgs = <T extends {}>( nodeType:string, data:T ) => {
+  const [ type , ...modifiers ] = nodeType.split('.')
+  const params = formatArgs (data)
+  const mockedData = {
+    cuid: cuid(params),
+    locale: 'de_DE',
+    type,
+    modifiers
+  }
+  return mockedData
+}
 
 /**
  * arg = ['txt.heading','src.image']

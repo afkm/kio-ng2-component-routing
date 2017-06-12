@@ -6,6 +6,18 @@ Object.defineProperty(exports, "__esModule", { value: true });
 __export(require("./service/content-mocking.service"));
 __export(require("./content"));
 var content_1 = require("./content");
+var args_1 = require("./args");
+exports.mockContentWithArgs = function (nodeType, data) {
+    var _a = nodeType.split('.'), type = _a[0], modifiers = _a.slice(1);
+    var params = args_1.format(data);
+    var mockedData = {
+        cuid: content_1.cuid(params),
+        locale: 'de_DE',
+        type: type,
+        modifiers: modifiers
+    };
+    return mockedData;
+};
 /**
  * arg = ['txt.heading','src.image']
  * arg = ['txt.heading',['src.big-image','txt.paragraph']]
