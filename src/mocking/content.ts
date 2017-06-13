@@ -64,7 +64,7 @@ export const mockContent = ( value:string, modifiers:string[]=[] ) => {
   console.groupEnd ()*/
   return node
 }
-
+/*
 export const mockContentWithArgs = ( contentType:'src'|'txt', modifiers:string[], args:MockingParams ):KioContentModel => {
   return new KioContentModel({
     type: contentType, 
@@ -72,3 +72,4 @@ export const mockContentWithArgs = ( contentType:'src'|'txt', modifiers:string[]
     modifiers
   })
 }
+*/
