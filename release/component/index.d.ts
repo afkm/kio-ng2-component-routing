@@ -1,1 +1,1 @@
-export * from './interfaces';
+export { ComponentStructure, ComponentAnnotation, ComponentAnnotationConfig, ComponentFragmentStructure, ComponentFixture } from 'kio-ng2';

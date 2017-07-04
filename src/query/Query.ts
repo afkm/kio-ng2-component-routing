@@ -8,7 +8,7 @@ export const assertComponent = ( queryableAnnotation : QueryableAnnotation ) => 
 
   const messages:string[] = []
 
-  if ( queryableAnnotation.type && assert.eq ( queryableAnnotation.type ) ( node.type ) === false )
+  if ( queryableAnnotation.type && assert.eq ( <string>queryableAnnotation.type ) ( node.type ) === false )
   {
     //console.log('invalid node type ' , node.type , ' - component requires: ' , queryableAnnotation.type )
     messages.push ( 'invalid node type "'+node.type+'" for component' )

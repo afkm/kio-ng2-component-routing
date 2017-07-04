@@ -1,3 +1,4 @@
+import { ComponentStructure, ComponentFragmentStructure } from 'kio-ng2';
 export interface Predicate {
     (arg: any): boolean;
 }
@@ -44,16 +45,11 @@ export interface ListQuery<T> extends ValueQuery<ListValue> {
     deepEqual?: T[];
     either?: T[];
 }
-export interface ComponentFixture {
-    matching: any;
-}
-export interface QueryableAnnotation {
-    type: string;
-    modifiers?: ListQuery<string>;
+export interface QueryableAnnotation extends ComponentStructure {
+    modifiers: ListQuery<string>;
     childTypes?: ListQuery<string>;
-    fixture?: ComponentFixture;
 }
-export interface QueryableFragmentAnnotation extends QueryableAnnotation {
+export interface QueryableFragmentAnnotation extends ComponentFragmentStructure {
     type: 'fragment';
     childTypes?: ListQuery<string>;
 }

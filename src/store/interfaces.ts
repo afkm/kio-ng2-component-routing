@@ -1,8 +1,8 @@
-import { ComponentFixture, QueryableAnnotation } from '../query/interfaces'
+import { ComponentFixture, ComponentAnnotation } from 'kio-ng2'
 
 export interface KioComponentItem {
   fixture:ComponentFixture;
-  criteria:QueryableAnnotation;
+  criteria:ComponentAnnotation;
   componentName:string;
   component:any;
 }

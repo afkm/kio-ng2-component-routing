@@ -14,6 +14,5 @@ exports.ContentMockingService = mocking_1.ContentMockingService;
 __export(require("./query/Query"));
 var Query = require("./query/Query");
 exports.Query = Query;
-__export(require("./component"));
 __export(require("./store"));
 //# sourceMappingURL=index.js.map
