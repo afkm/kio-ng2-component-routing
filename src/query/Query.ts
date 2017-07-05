@@ -2,7 +2,7 @@ import { KioFragment, KioNode } from 'kio-ng2'
 import { QueryableAnnotation } from './interfaces'
 
 import * as assert from './assertion'
-import * as _ from '@types/lodash'
+import * as _ from 'lodash'
 
 export const assertComponent = ( queryableAnnotation : QueryableAnnotation ) => ( node:KioFragment ) : string[]|null => {
 
