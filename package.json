@@ -41,6 +41,6 @@
     "nodemon": "^1.11.0",
     "ts-mocha": "^1.0.3",
     "tslint": "^5.0.0",
-    "typescript": "^2.2.2"
+    "typescript": "2.3.4"
   }
 }
