@@ -1,4 +1,4 @@
-import { ComponentFixture, ComponentAnnotation } from 'kio-ng2'
+import { ComponentFixture, ComponentAnnotation } from 'kio-ng2-data'
 
 export interface KioComponentItem {
   fixture:ComponentFixture;

@@ -1,4 +1,4 @@
-import { KioImageMetaData, KioMediaType } from 'kio-ng2'
+import { KioImageMetaData, KioMediaType } from 'kio-ng2-data'
 
 export function mockMetaForImage ( options?:any ) {
   const {

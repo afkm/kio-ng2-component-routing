@@ -4,7 +4,7 @@ export * from './content'
 import { cuid } from './content'
 import { format as formatArgs } from './args'
 
-import { KioContentModel, KioFragmentModel, KioNodeModel, KioNode, KioContent } from 'kio-ng2'
+import { KioContentModel, KioFragmentModel, KioNodeModel, KioNode, KioContent } from 'kio-ng2-data'
 
 export const mockContentWithArgs = <T extends {}>( nodeType:string, data:T ) => {
   const [ type , ...modifiers ] = nodeType.split('.')

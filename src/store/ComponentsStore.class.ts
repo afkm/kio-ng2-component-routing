@@ -8,7 +8,7 @@ import {
 import { assertComponent, matchComponent } from '../query/Query'
 import * as _ from 'lodash'
 
-import { KioNode, KioFragment, KioContent } from 'kio-ng2'
+import { KioNode, KioFragment, KioContent } from 'kio-ng2-data'
 
 const indexToProp = {
   "PublicationComponents": "component",

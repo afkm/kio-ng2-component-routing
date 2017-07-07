@@ -1,4 +1,4 @@
-import { KioFragment, KioNode } from 'kio-ng2'
+import { KioFragment, KioNode } from 'kio-ng2-data'
 import { QueryableAnnotation } from './interfaces'
 
 import * as assert from './assertion'

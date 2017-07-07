@@ -1,6 +1,6 @@
-import { KioNode, KioNodeModel, KioContentModel, KioFragmentModel } from 'kio-ng2'
+import { KioNode, KioNodeModel, KioContentModel, KioFragmentModel } from 'kio-ng2-data'
 import * as _ from 'lodash'
-import { KioTxtData, KioSrcData } from 'kio-ng2'
+import { KioTxtData, KioSrcData } from 'kio-ng2-data'
 import { renderDataForNode } from '../media'
 import * as store from '../../store'
 

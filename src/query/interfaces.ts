@@ -1,4 +1,4 @@
-import { ComponentStructure, ComponentFragmentStructure } from 'kio-ng2'
+import { ComponentStructure, ComponentFragmentStructure } from 'kio-ng2-data'
 
 export interface Predicate { 
   ( arg:any ) : boolean 

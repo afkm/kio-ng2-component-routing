@@ -1,4 +1,4 @@
-import { KioContentModel, KioFragmentModel } from 'kio-ng2'
+import { KioContentModel, KioFragmentModel } from 'kio-ng2-data'
 import { MockingParams, MockedData, format as formatArgs, parse as parseArgs } from './args'
 
 declare const require
