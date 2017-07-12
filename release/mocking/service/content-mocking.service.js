@@ -8,7 +8,7 @@ var __assign = (this && this.__assign) || Object.assign || function(t) {
     return t;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var kio_ng2_1 = require("kio-ng2");
+var kio_ng2_data_1 = require("kio-ng2-data");
 var _ = require("lodash");
 var media_1 = require("../media");
 var store = require("../../store");
@@ -34,10 +34,10 @@ var ContentMockingService = (function () {
         if (!mockedData)
             return null;
         if (mockedData.type === 'fragment') {
-            mockedData = new kio_ng2_1.KioFragmentModel(mockedData);
+            mockedData = new kio_ng2_data_1.KioFragmentModel(mockedData);
         }
         else {
-            mockedData = new kio_ng2_1.KioContentModel(mockedData);
+            mockedData = new kio_ng2_data_1.KioContentModel(mockedData);
         }
         this.fillContent(mockedData);
         return mockedData;

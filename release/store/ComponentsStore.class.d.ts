@@ -1,5 +1,5 @@
 import { KioComponentItem, ItemIterator, ItemFilter, ItemMapper, IndexSymbol } from './interfaces';
-import { KioContent } from 'kio-ng2';
+import { KioContent } from 'kio-ng2-data';
 export declare class ComponentsStore {
     items: KioComponentItem[];
     /**

@@ -1,4 +1,4 @@
-import { KioNode } from 'kio-ng2';
+import { KioNode } from 'kio-ng2-data';
 export interface MockedData {
     [key: string]: any;
 }
