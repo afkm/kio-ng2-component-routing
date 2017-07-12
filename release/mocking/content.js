@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var kio_ng2_1 = require("kio-ng2");
+var kio_ng2_data_1 = require("kio-ng2-data");
 var _cuid = require('cuid');
 var parseModifiers = function (value) { return (value.match(/\.(\w+)/gm) || []).map(function (v) { return v.substr(1); }); };
 var parseTypeName = function (value) { return (value.match(/^\w+/) || [])[0]; };
@@ -21,7 +21,7 @@ exports.cuid = function () {
 };
 exports.mockFragment = function (children, modifiers) {
     if (modifiers === void 0) { modifiers = []; }
-    return new kio_ng2_1.KioFragmentModel({
+    return new kio_ng2_data_1.KioFragmentModel({
         cuid: exports.cuid(),
         modifiers: modifiers,
         children: children.map(function (child) {
@@ -51,7 +51,7 @@ exports.mockContent = function (value, modifiers) {
         cuid: exports.cuid.apply(void 0, params),
         locale: 'en_US'
     };
-    var node = new kio_ng2_1.KioContentModel(data);
+    var node = new kio_ng2_data_1.KioContentModel(data);
     /*const groupLabel = 'mock content for "'+typeName+'" (' + node.cuid + ')'
     console.groupCollapsed ( groupLabel )
     console.table ( data )

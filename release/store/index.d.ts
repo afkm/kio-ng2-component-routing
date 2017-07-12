@@ -1,6 +1,6 @@
 import { KioComponentItem, IndexSymbol } from './interfaces';
 export * from './interfaces';
-import { KioContent } from 'kio-ng2';
+import { KioContent } from 'kio-ng2-data';
 export declare const registerIndex: (indexName: string, indexSymbols: IndexSymbol[]) => void;
 export declare const registerComponent: (item: KioComponentItem) => void;
 export declare const getAllComponents: () => KioComponentItem[];
