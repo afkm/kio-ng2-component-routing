@@ -64,6 +64,19 @@ describe('test assertion',()=>{
     })
   })
 
+  describe ( 'list combinations' , () => {
+
+    const modifiers = ['foo','bar']
+
+    it(`${modifiers.join(',')}  [contains('foo') && containsNot('boo')]`,()=>{
+
+      expect(assert.containsNot('boo')(modifiers)).toEqual(true)
+      expect(assert.contains('foo')(modifiers)).toEqual(true)
+
+    })
+
+  })
+
   describe ( 'list query' , () => {
 
     testMatcher('query',{

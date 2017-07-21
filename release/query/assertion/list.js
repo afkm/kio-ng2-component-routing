@@ -27,13 +27,14 @@ exports.contains = function (value, invert) {
     if (Array.isArray(value)) {
         return function (listValue) {
             var matchingValues = value.filter(function (valueItem) {
-                return exports.contains(valueItem)(listValue);
+                return exports.contains(valueItem, invert)(listValue);
             });
             return matchingValues.length === value.length;
         };
     }
     return function (listValue) {
-        return listValue.indexOf(value) > -1 !== invert;
+        var idx = listValue.indexOf(value);
+        return idx > -1 !== invert;
     };
 };
 /**

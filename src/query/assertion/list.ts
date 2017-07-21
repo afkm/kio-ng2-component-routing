@@ -43,14 +43,15 @@ export const contains : listMatcher<any> = ( value:any, invert:boolean=false ):V
   {
     return ( listValue:any[] ) : boolean => {
       const matchingValues = value.filter ( ( valueItem ) => {
-        return contains ( valueItem ) ( listValue )
+        return contains ( valueItem, invert ) ( listValue )
       } )
       return matchingValues.length === value.length
     }
   }
 
   return ( listValue:any[] ) => {
-    return listValue.indexOf ( value ) > -1 !== invert
+    const idx = listValue.indexOf(value)
+    return idx > -1 !== invert
   }
 
 }
