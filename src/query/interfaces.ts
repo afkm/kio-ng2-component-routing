@@ -93,7 +93,7 @@ export interface ListQuery<T> extends ValueQuery<ListValue> {
 }*/
 
 export interface QueryableAnnotation extends ComponentStructure {
-  modifiers:ListQuery<string>;
+  modifiers?:ListQuery<string>;
   childTypes?:ListQuery<string>;
 }
 

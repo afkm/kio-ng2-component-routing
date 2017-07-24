@@ -46,7 +46,7 @@ export interface ListQuery<T> extends ValueQuery<ListValue> {
     either?: T[];
 }
 export interface QueryableAnnotation extends ComponentStructure {
-    modifiers: ListQuery<string>;
+    modifiers?: ListQuery<string>;
     childTypes?: ListQuery<string>;
 }
 export interface QueryableFragmentAnnotation extends ComponentFragmentStructure {
