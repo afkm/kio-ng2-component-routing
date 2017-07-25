@@ -747,10 +747,6 @@ kind-of@^4.0.0:
   version "0.0.1"
   resolved "https://codeload.github.com/afkm/kio-ng2-data/tar.gz/0f05d1483495edd095ea8a3a7ad72828a87d1ebb"
 
-"kio-ng2@github:afkmatze/kio-ng2#digit-bma":
-  version "0.0.1"
-  resolved "https://codeload.github.com/afkmatze/kio-ng2/tar.gz/087b2d17c787cd630609092a0caab168c1d7ff4f"
-
 latest-version@^1.0.0:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/latest-version/-/latest-version-1.0.1.tgz#72cfc46e3e8d1be651e1ebb54ea9f6ea96f374bb"
