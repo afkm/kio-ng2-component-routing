@@ -1,0 +1,33 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "baseUrl": "src",
+    "module": "es2015",
+    "moduleResolution": "node",
+    "declaration": true,
+    "sourceMap": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "lib": ["es2015", "dom"],
+    "noImplicitAny": true,
+    "suppressImplicitAnyIndexErrors": true
+  },
+
+  "files": [
+    "build/module.ts"
+  ],
+  "paths": {
+    "@angular/common": ["node_modules/@angular/common"],
+    "@angular/compiler": ["node_modules/@angular/compiler"],
+    "@angular/core": ["node_modules/@angular/core"],
+    "@angular/forms": ["node_modules/@angular/forms"],
+    "@angular/platform-browser": ["node_modules/@angular/platform-browser"],
+    "@angular/platform-browser-dynamic": ["node_modules/@angular/platform-browser-dynamic"],
+    "@angular/router": ["node_modules/@angular/router"],
+    "@angular/http": ["node_modules/@angular/http"]
+  },
+  "angularCompilerOptions": {
+    "genDir": "aot",
+    "skipMetadataEmit" : false
+ }
+}

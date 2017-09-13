@@ -1,0 +1,10 @@
+import { ComponentRef, ViewContainerRef, ComponentFactoryResolver, ComponentFactory, Injector } from '@angular/core';
+import { KioContentModel, KioFragmentModel } from 'kio-ng2-data';
+import { FragmentDataComponent, ContentDataComponent } from '../components/base';
+import { StoreItem } from '../interfaces/store';
+export declare function componentItemForNode(node: KioContentModel | KioFragmentModel): StoreItem;
+export declare function componentItemByName(name: string): StoreItem;
+export declare function createChildInjector(node: KioContentModel | KioFragmentModel, parentInjector?: Injector): Injector;
+export declare function createFactoryForComponentItem<T extends ContentDataComponent | FragmentDataComponent>(factoryResolver: ComponentFactoryResolver, componentItem: any): ComponentFactory<T>;
+export declare function createComponentOnViewContainer(factoryResolver: ComponentFactoryResolver, viewContainer: ViewContainerRef, data: KioContentModel | KioFragmentModel, viewParams?: any, parentInjector?: Injector): ComponentRef<ContentDataComponent | FragmentDataComponent>;
+export declare function createComponentItemOnViewContainer(componentItem: any, factoryResolver: ComponentFactoryResolver, viewContainer: ViewContainerRef, data: KioContentModel | KioFragmentModel, viewParams?: any, parentInjector?: Injector): ComponentRef<ContentDataComponent | FragmentDataComponent>;
