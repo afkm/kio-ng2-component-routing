@@ -75,7 +75,7 @@
   optionalDependencies:
     node-sass "^4.3.0"
 
-"@angular/common@^4.0.0":
+"@angular/common@^4.0.0", "@angular/common@^4.2.3":
   version "4.3.6"
   resolved "https://registry.yarnpkg.com/@angular/common/-/common-4.3.6.tgz#ed37e9307c7506dd834797c1a6cf675e52b5b6ee"
   dependencies:
@@ -163,9 +163,13 @@
   dependencies:
     "@types/jasmine" "*"
 
-"@types/node@^6.0.46", "@types/node@~6.0.60":
+"@types/node@^6.0.46":
   version "6.0.88"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-6.0.88.tgz#f618f11a944f6a18d92b5c472028728a3e3d4b66"
+
+"@types/node@^8.0.28":
+  version "8.0.28"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-8.0.28.tgz#86206716f8d9251cf41692e384264cbd7058ad60"
 
 "@types/q@^0.0.32":
   version "0.0.32"
@@ -1237,6 +1241,10 @@ dashdash@^1.12.0:
   resolved "https://registry.yarnpkg.com/dashdash/-/dashdash-1.14.1.tgz#853cfa0f7cbe2fed5de20326b8dd581035f6e2f0"
   dependencies:
     assert-plus "^1.0.0"
+
+dasherize@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/dasherize/-/dasherize-2.0.0.tgz#6d809c9cd0cf7bb8952d80fc84fa13d47ddb1308"
 
 date-now@^0.1.4:
   version "0.1.4"
@@ -2788,6 +2796,25 @@ kind-of@^4.0.0:
   resolved "https://registry.yarnpkg.com/kind-of/-/kind-of-4.0.0.tgz#20813df3d712928b207378691a45066fae72dd57"
   dependencies:
     is-buffer "^1.1.5"
+
+"kio-ng2-component-routing@github:afkmatze/kio-ng2-component-routing#rewrite":
+  version "0.0.8"
+  resolved "https://codeload.github.com/afkmatze/kio-ng2-component-routing/tar.gz/8bc6d546f4322683d842be76af3d2fd4583be494"
+  dependencies:
+    "@angular/common" "^4.2.3"
+    dasherize "^2.0.0"
+
+"kio-ng2-ctn@github:afkm/kio-ng2-ctn#v0.0.6":
+  version "0.0.6"
+  resolved "https://codeload.github.com/afkm/kio-ng2-ctn/tar.gz/1189d54daaefa86a15e9e2a6f407bbbae872da8f"
+
+"kio-ng2-data@github:afkm/kio-ng2-data#v0.0.1":
+  version "0.0.1"
+  resolved "https://codeload.github.com/afkm/kio-ng2-data/tar.gz/0f05d1483495edd095ea8a3a7ad72828a87d1ebb"
+
+"kio-ng2-scrolling@github:afkm/kio-ng2-scrolling#v0.0.4":
+  version "0.0.4"
+  resolved "https://codeload.github.com/afkm/kio-ng2-scrolling/tar.gz/37e06d7470c8402d861d18163b04b4e00188fa85"
 
 lazy-cache@^0.2.3:
   version "0.2.7"
@@ -5300,16 +5327,9 @@ wrappy@1:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/wrappy/-/wrappy-1.0.2.tgz#b5243d8f3ec1aa35f1364605bc0d1036e30ab69f"
 
-ws@1.1.2:
+ws@1.1.2, ws@^1.0.1:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/ws/-/ws-1.1.2.tgz#8a244fa052401e08c9886cf44a85189e1fd4067f"
-  dependencies:
-    options ">=0.0.5"
-    ultron "1.0.x"
-
-ws@^1.0.1:
-  version "1.1.4"
-  resolved "https://registry.yarnpkg.com/ws/-/ws-1.1.4.tgz#57f40d036832e5f5055662a397c4de76ed66bf61"
   dependencies:
     options ">=0.0.5"
     ultron "1.0.x"

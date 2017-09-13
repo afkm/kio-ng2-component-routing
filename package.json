@@ -5,6 +5,9 @@
   "main": "./release/module.js",
   "module": "./release/module.js",
   "typings": "./release/module.d.ts",
+  "files": [
+    "./release/factory"
+  ],
   "scripts": {
     "prebuild": "rm -rf ./release",
     "transpile": "npm run ngModule:build",
