@@ -12,9 +12,10 @@
     "prebuild": "rm -rf ./release",
     "transpile": "npm run ngModule:build",
     "ngModule:build": "./scripts/ngModule.sh build",
+    "copy:dev": "./scripts/copy_release.sh ../../digit-wmr/node_modules/kio-ng2-component-routing",
     "build": "npm run ngModule:build",
     "build:watch": "./scripts/watch.sh build",
-    "build:release": "NODE_ENV=production npm run build",
+    "build:release": "NODE_ENV=production npm run build && npm run copy:dev",
     "build:release:watch": "./scripts/watch.sh build:release",
     "preversion": "npm run build",
     "dev:watch": "nodemon -w ./src -e ts --exec \"npm run build\"",
@@ -68,7 +69,9 @@
   },
   "dependencies": {
     "@angular/common": "^4.2.3",
-    "dasherize": "^2.0.0"
+    "@types/lodash": "^4.14.74",
+    "dasherize": "^2.0.0",
+    "lodash": "^4.17.4"
   },
   "repository": {
     "type": "git",

@@ -6,11 +6,15 @@ import { ListComponentRouter } from './components/list-router/list-router.compon
 import { DataComponent, FragmentDataComponent, ContentDataComponent, TextDataComponent } from './components/base';
 import { ContentLoaderDirective } from './directives/content-loader.directive';
 import { ResizingService } from './services/resizing.service';
+import * as Factory from './factory';
+import { Mocking as mock } from './mocking';
 export { ResizingService } from './services/resizing.service';
 export { ContentLoaderDirective } from './directives/content-loader.directive';
 export { DataComponent, FragmentDataComponent, ContentDataComponent, TextDataComponent } from './components/base';
 export { RoutableComponent } from './decorators/component.decorator';
 export { defaultStore } from './classes/component-store';
+export { Factory, mock };
+export { ContentMockingService } from './mocking/service/content-mocking.service';
 export var RoutingComponents = [ComponentRouter, ListComponentRouter, DataComponent, FragmentDataComponent, ContentDataComponent, TextDataComponent];
 var KioNg2ComponentRoutingModule = (function () {
     function KioNg2ComponentRoutingModule() {

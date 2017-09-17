@@ -4,6 +4,7 @@ export interface StoreItem {
     name: string;
     annotation: Annotation<ContentType>;
     component: any;
+    fixture?: any;
 }
 export interface Store {
     readonly size: number;

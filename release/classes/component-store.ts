@@ -41,7 +41,7 @@ export class ComponentStore implements Store {
     return this.components.findIndex ( $item => $item.name === item.name )
   }
 
-  registerComponent ( componentName:string, annotation:Annotation<ContentType>, component:any ):void
+  registerComponent ( componentName:string, annotation:Annotation<ContentType>, component:any, fixture?:any ):void
   {
     //console.log('ComponentStore::registerComponent -> %s', componentName, { annotation, component })
     if ( this.getComponentByName ( componentName ) ) {
@@ -51,7 +51,8 @@ export class ComponentStore implements Store {
     const item : StoreItem = {
       name: componentName,
       annotation ,
-      component
+      component,
+      fixture
     }
 
     //console.log('ComponentStore::registerComponent | storeItem', item )

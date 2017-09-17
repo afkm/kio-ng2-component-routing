@@ -7,6 +7,9 @@ import { RoutableComponent } from './decorators/component.decorator'
 import { DataComponent, FragmentDataComponent, ContentDataComponent, TextDataComponent } from './components/base'
 import { ContentLoaderDirective } from './directives/content-loader.directive'
 import { ResizingService } from './services/resizing.service'
+import * as Factory from './factory'
+import { Mocking as mock } from './mocking'
+import { ContentMockingService } from './mocking/service/content-mocking.service'
 
 export { ResizingService } from './services/resizing.service'
 export { ContentLoaderDirective } from './directives/content-loader.directive'
@@ -19,6 +22,8 @@ export { ComponentAnnotation } from './interfaces/component-annotation'
 export { ComponentContentResolver } from './interfaces/content-resolver'
 
 export { defaultStore } from './classes/component-store'
+export { Factory, mock }
+export { ContentMockingService } from './mocking/service/content-mocking.service'
 
 export let RoutingComponents = [ ComponentRouter, ListComponentRouter, DataComponent, FragmentDataComponent, ContentDataComponent, TextDataComponent ]
 
