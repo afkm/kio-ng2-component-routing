@@ -27,7 +27,7 @@
     "test:fixture:watch": "./scripts/watch.sh test:fixture"
   },
   "keywords": [],
-  "author": "",
+  "author": "Matthias Buchholz <matthias@afkm.io>",
   "license": "ISC",
   "peerDependencies": {
     "kio-ng2-data": "github:afkm/kio-ng2-data#v0.0.1",
@@ -75,10 +75,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/afkmatze/kio-ng2-component-routing.git"
+    "url": "git+https://github.com/afkm/kio-ng2-component-routing.git"
   },
   "bugs": {
-    "url": "https://github.com/afkmatze/kio-ng2-component-routing/issues"
+    "url": "https://github.com/afkm/kio-ng2-component-routing/issues"
   },
-  "homepage": "https://github.com/afkmatze/kio-ng2-component-routing#readme"
+  "homepage": "https://github.com/afkm/kio-ng2-component-routing#readme"
 }
