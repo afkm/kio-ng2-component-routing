@@ -2,7 +2,6 @@
 
 /test-app
 
-
 *.ngfactory.ts
 
-documentation
+/documentation
