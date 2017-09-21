@@ -27,8 +27,8 @@
   "author": "Matthias Buchholz <matthias@afkm.io>",
   "license": "ISC",
   "peerDependencies": {
-    "kio-ng2-data": "github:afkm/kio-ng2-data#v0.0.1",
-    "kio-ng2-ctn": "github:afkm/kio-ng2-ctn#v0.0.6",
+    "kio-ng2-data": "github:afkm/kio-ng2-data",
+    "kio-ng2-ctn": "github:afkm/kio-ng2-ctn",
     "kio-ng2-i18n": "github:afkm/kio-ng2-i18n",
     "@angular/common": "^4.2.3",
     "@angular/compiler": "^4.2.3",
@@ -65,7 +65,7 @@
   },
   "dependencies": {
     "@angular/common": "^4.2.3",
-    "kio-ng2-scrolling": "github:afkm/kio-ng2-scrolling#v0.0.3",
+    "kio-ng2-scrolling": "github:afkm/kio-ng2-scrolling#v0.0.4",
     "@types/lodash": "^4.14.74",
     "dasherize": "^2.0.0",
     "lodash": "^4.17.4"
