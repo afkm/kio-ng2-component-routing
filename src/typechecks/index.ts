@@ -1,6 +1,7 @@
 import { KioContentModel, KioFragmentModel, KioPublicationModel } from 'kio-ng2-data'
 
 import { Node, Data, Collection, Stateful } from '../interfaces/data-component'
+import { ComponentData } from '../types/component-data'
 
 export function isStateful ( other:any ):other is Stateful {
   return ( 
@@ -10,7 +11,7 @@ export function isStateful ( other:any ):other is Stateful {
   )
 }
 
-export function isNode <T> ( other:any ):other is Node<T> {
+export function isNode <T extends ComponentData> ( other:any ):other is Node<T> {
   return ( 
     'object' === typeof other
     &&

@@ -24,6 +24,6 @@ export interface Data<D> extends Node<KioContentModel> {
     onBeforeLoad(): void;
     onAfterLoad(): void;
 }
-export interface Collection<T extends ComponentData, C extends Node<T>> {
+export interface Collection<T extends ComponentData, C> {
     childComponents: Observable<C>;
 }
