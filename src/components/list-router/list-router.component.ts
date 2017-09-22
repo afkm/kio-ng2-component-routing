@@ -6,6 +6,7 @@ import { KioFragmentModel, KioPublicationModel, KioContentModel } from 'kio-ng2-
 import { DataComponent, FragmentDataComponent, ContentDataComponent } from '../base'
 
 @Component({
+  moduleId: module.id,
   selector: 'list-component-router',
   templateUrl: './list-router.component.html'
 })

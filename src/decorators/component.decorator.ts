@@ -25,6 +25,10 @@ export function RoutableComponent ( annotation:any )
     ...component
   } = annotation
 
+  if ( annotation.template && annotation.templateUrl ) {
+      annotation.template = undefined
+  }
+
   const componentAnnotation = Component(component)
   //window.afkm.logger.log('decorate queryable',queryable,'on',component)
   return function decorateConstructor <T1 extends ConstructorOf<FragmentDataComponent>|ConstructorOf<ContentDataComponent>> ( instance:T1 ):T1
@@ -39,7 +43,7 @@ export function RoutableComponent ( annotation:any )
     //componentAnnotation(instance)
 
 
-    const parentAnnotation = parentAnnotations[0]
+    const parentAnnotation:any = parentAnnotations ? parentAnnotations[0] : {}
 
     /*if ( 'providers' in parentAnnotation ) {
         window.afkm.logger.log('providers in parentAnnotation', parentAnnotation.providers )
@@ -58,7 +62,12 @@ export function RoutableComponent ( annotation:any )
     // window.afkm.logger.log('targetAnnotations before decoration',targetAnnotations)
     targetAnnotations = Reflect.getMetadata('annotations', instance);
 
-    var inheritedTargetAnnotation = inheritAnnotation ( parentAnnotations[0], component )
+    var inheritedTargetAnnotation = inheritAnnotation ( parentAnnotation, component )
+    
+    if ( ('template' in inheritedTargetAnnotation) && ('templateUrl' in inheritedTargetAnnotation) ) {
+        inheritedTargetAnnotation.template = undefined
+    }
+
     var metadata = new Component(inheritedTargetAnnotation)
     Reflect.defineMetadata('annotations', [ metadata ], instance);
     var targetParamTypes = Reflect.getMetadata('design:paramtypes', instance);

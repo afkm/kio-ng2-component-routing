@@ -36,6 +36,7 @@ var ListComponentRouter = (function (_super) {
 export { ListComponentRouter };
 ListComponentRouter.decorators = [
     { type: Component, args: [{
+                moduleId: module.id,
                 selector: 'list-component-router',
                 templateUrl: './list-router.component.html'
             },] },

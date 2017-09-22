@@ -13,6 +13,9 @@ import { inheritAnnotation } from './inherit';
 var Reflect = global['Reflect'];
 export function RoutableComponent(annotation) {
     var queryable = annotation.queryable, component = __rest(annotation, ["queryable"]);
+    if (annotation.template && annotation.templateUrl) {
+        annotation.template = undefined;
+    }
     var componentAnnotation = Component(component);
     //window.afkm.logger.log('decorate queryable',queryable,'on',component)
     return function decorateConstructor(instance) {
@@ -23,7 +26,7 @@ export function RoutableComponent(annotation) {
         var parentParameters = Reflect.getMetadata('parameters', parentTarget);
         var targetAnnotations = Reflect.getMetadata('annotations', instance);
         //componentAnnotation(instance)
-        var parentAnnotation = parentAnnotations[0];
+        var parentAnnotation = parentAnnotations ? parentAnnotations[0] : {};
         /*if ( 'providers' in parentAnnotation ) {
             window.afkm.logger.log('providers in parentAnnotation', parentAnnotation.providers )
         }*/
@@ -37,7 +40,10 @@ export function RoutableComponent(annotation) {
         // window.afkm.logger.log('parentParameters',parentParameters)
         // window.afkm.logger.log('targetAnnotations before decoration',targetAnnotations)
         targetAnnotations = Reflect.getMetadata('annotations', instance);
-        var inheritedTargetAnnotation = inheritAnnotation(parentAnnotations[0], component);
+        var inheritedTargetAnnotation = inheritAnnotation(parentAnnotation, component);
+        if (('template' in inheritedTargetAnnotation) && ('templateUrl' in inheritedTargetAnnotation)) {
+            inheritedTargetAnnotation.template = undefined;
+        }
         var metadata = new Component(inheritedTargetAnnotation);
         Reflect.defineMetadata('annotations', [metadata], instance);
         var targetParamTypes = Reflect.getMetadata('design:paramtypes', instance);

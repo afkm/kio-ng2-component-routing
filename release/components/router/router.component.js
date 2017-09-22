@@ -75,6 +75,7 @@ var ComponentRouter = (function (_super) {
 export { ComponentRouter };
 ComponentRouter.decorators = [
     { type: Component, args: [{
+                moduleId: module.id,
                 selector: 'component-router',
                 templateUrl: './router.component.html'
             },] },

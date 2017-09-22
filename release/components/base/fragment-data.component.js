@@ -82,6 +82,7 @@ var FragmentDataComponent = (function (_super) {
 export { FragmentDataComponent };
 FragmentDataComponent.decorators = [
     { type: Component, args: [{
+                moduleId: module.id,
                 template: ''
             },] },
 ];

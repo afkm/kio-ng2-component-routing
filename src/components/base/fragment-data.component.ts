@@ -21,6 +21,7 @@ import { ContentDataComponent } from './content-data.component'
 
 
 @Component({
+  moduleId: module.id,
   template: ''
 })
 export class FragmentDataComponent extends DataComponent<KioFragmentModel> {

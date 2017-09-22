@@ -17,6 +17,7 @@ export { DataComponent, FragmentDataComponent, ContentDataComponent, TextDataCom
 export { RoutableComponent } from './decorators/component.decorator'
 
 export { Routable } from './interfaces/routable-component'
+export { ViewParams } from './interfaces/view-params'
 export { Annotation, FragmentAnnotation, ContentAnnotation } from './interfaces/annotation'
 export { ComponentAnnotation } from './interfaces/component-annotation'
 export { ComponentContentResolver } from './interfaces/content-resolver'

@@ -13,3 +13,4 @@ export * from './value-filter';
 export * from './value-query';
 export * from './value-test';
 export * from './value.matcher';
+export * from './view-params';

@@ -16,6 +16,7 @@ import { createComponentOnViewContainer, componentItemByName, createComponentIte
 
 
 @Component({
+  moduleId: module.id,
   selector: 'component-router',
   templateUrl: './router.component.html'
 })

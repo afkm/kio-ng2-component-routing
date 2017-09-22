@@ -179,6 +179,7 @@ var DataComponent = (function (_super) {
 export { DataComponent };
 DataComponent.decorators = [
     { type: Component, args: [{
+                moduleId: module.id,
                 template: '',
                 selector: 'data-component',
                 providers: [

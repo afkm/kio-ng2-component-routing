@@ -27,6 +27,7 @@ import { ComponentState } from '../../enums/component-state.enum'
 
 
 @Component({
+  moduleId: module.id,
   template: '',
   selector: 'data-component',
   providers: [
