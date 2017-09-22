@@ -2,8 +2,8 @@
   "name": "kio-ng2-component-routing",
   "version": "0.1.2",
   "description": "kio module for ng2 component matching",
-  "main": "./release",
-  "module": "./release/module.js",
+  "main": "./src/module",
+  "module": "./src/module",
   "typings": "./release/module.d.ts",
   "scripts": {
     "prebuild": "rm -rf ./release",
