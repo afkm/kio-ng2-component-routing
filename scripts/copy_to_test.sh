@@ -13,9 +13,13 @@ if [[ ! -d "${TEST_APP_ROOT}" ]]; then
   exit 1
 fi
 
+function sync_dir () {
+  printf 'Syncing build time \x1b[1m%s\x1b[0m to \x1b[1;32m%s\x1b[0m\n' "/${1}/." "${TEST_APP_MODULE}/${1}"
+  rsync -azh --delete "${MODULE_ROOT}/${1}/." "${TEST_APP_MODULE}/${1}"
+}
 
-rsync -azh "${MODULE_ROOT}/release/." "${TEST_APP_MODULE}/release"
-rsync -azh "${MODULE_ROOT}/src/." "${TEST_APP_MODULE}/src"
+sync_dir "release"
+sync_dir "src"
 #rsync -azh "${MODULE_ROOT}/src/." "${TEST_APP_MODULE}/src/."
 
 "${SCRIPT_PATH}/merge_packages.js" "${MODULE_ROOT}" "${TEST_APP_MODULE}" > /dev/null

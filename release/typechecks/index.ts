@@ -29,7 +29,7 @@ export function isData <T> ( other:any ):other is Data<T> {
   )
 }
 
-export function isCollection <T>( other:any ):other is Collection<T,Data<T>> {
+export function isCollection <T extends ComponentData>( other:any ):other is Collection<T,Data<T>> {
   return ( 
     'object' === typeof other
     &&

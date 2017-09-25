@@ -6,7 +6,7 @@ import { matchComponent } from '../matching/Query'
 
 const dasherize:{(value:string):string} = require('dasherize')
 
-const getListQueryValue = ( listQuery:ListQuery<ContentType>, m:number=1 ):number => {
+const getListQueryValue = ( listQuery:Annotation<ContentType>, m:number=1 ):number => {
   if ( 'string' === typeof listQuery ) {
     return m
   }

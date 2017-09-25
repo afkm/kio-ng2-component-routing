@@ -20,5 +20,6 @@ export class ResizingService {
 
   resize:Observable<Size>=Observable.fromEvent(window,'resize')
     .debounceTime(1000/30)
+    .map ( e => this.getSize() )
     
 }

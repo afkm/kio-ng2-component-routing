@@ -2,8 +2,10 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 var ResizingService = (function () {
     function ResizingService() {
+        var _this = this;
         this.resize = Observable.fromEvent(window, 'resize')
-            .debounceTime(1000 / 30);
+            .debounceTime(1000 / 30)
+            .map(function (e) { return _this.getSize(); });
     }
     ResizingService.prototype.getSize = function (w) {
         if (w === void 0) { w = window; }
