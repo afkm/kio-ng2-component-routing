@@ -1,7 +1,7 @@
 import { Annotation, ContentType } from '../interfaces/annotation'
 import { ComponentData } from '../types/component-data'
 import { Store, StoreItem, ListQuery } from '../interfaces'
-//import * as dasherize from 'dasherize'
+import * as dasherize from 'dasherize'
 import { matchComponent } from '../matching/Query'
 
 const dasherize:{(value:string):string} = require('dasherize')
@@ -41,7 +41,7 @@ export class ComponentStore implements Store {
     return this.components.findIndex ( $item => $item.name === item.name )
   }
 
-  registerComponent ( componentName:string, annotation:Annotation<ContentType>, component:any, fixture?:any ):void
+  registerComponent ( componentName:string, annotation:Annotation<ContentType>, component:any ):void
   {
     //console.log('ComponentStore::registerComponent -> %s', componentName, { annotation, component })
     if ( this.getComponentByName ( componentName ) ) {
@@ -51,8 +51,7 @@ export class ComponentStore implements Store {
     const item : StoreItem = {
       name: componentName,
       annotation ,
-      component,
-      fixture
+      component
     }
 
     //console.log('ComponentStore::registerComponent | storeItem', item )
