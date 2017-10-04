@@ -5,3 +5,5 @@
 *.ngfactory.ts
 
 /documentation
+
+*.spec.ts

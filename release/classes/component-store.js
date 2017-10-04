@@ -1,6 +1,5 @@
-//import * as dasherize from 'dasherize'
 import { matchComponent } from '../matching/Query';
-var dasherize = require('dasherize');
+import { dasherize } from '../utils/dasherize';
 var getListQueryValue = function (listQuery, m) {
     if (m === void 0) { m = 1; }
     if ('string' === typeof listQuery) {
@@ -36,7 +35,7 @@ var ComponentStore = (function () {
     ComponentStore.prototype.indexOf = function (item) {
         return this.components.findIndex(function ($item) { return $item.name === item.name; });
     };
-    ComponentStore.prototype.registerComponent = function (componentName, annotation, component, fixture) {
+    ComponentStore.prototype.registerComponent = function (componentName, annotation, component) {
         //console.log('ComponentStore::registerComponent -> %s', componentName, { annotation, component })
         if (this.getComponentByName(componentName)) {
             return;
@@ -44,8 +43,7 @@ var ComponentStore = (function () {
         var item = {
             name: componentName,
             annotation: annotation,
-            component: component,
-            fixture: fixture
+            component: component
         };
         //console.log('ComponentStore::registerComponent | storeItem', item )
         var idx = this.components.push(item);

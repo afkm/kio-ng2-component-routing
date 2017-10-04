@@ -1,10 +1,9 @@
 import { Annotation, ContentType } from '../interfaces/annotation'
 import { ComponentData } from '../types/component-data'
 import { Store, StoreItem, ListQuery } from '../interfaces'
-import * as dasherize from 'dasherize'
 import { matchComponent } from '../matching/Query'
 
-const dasherize:{(value:string):string} = require('dasherize')
+import { dasherize } from '../utils/dasherize'
 
 const getListQueryValue = ( listQuery:Annotation<ContentType>, m:number=1 ):number => {
   if ( 'string' === typeof listQuery ) {
