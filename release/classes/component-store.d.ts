@@ -6,7 +6,7 @@ export declare class ComponentStore implements Store {
     readonly size: number;
     protected components: StoreItem[];
     indexOf(item: StoreItem): number;
-    registerComponent(componentName: string, annotation: Annotation<ContentType>, component: any, fixture?: any): void;
+    registerComponent(componentName: string, annotation: Annotation<ContentType>, component: any): void;
     static FormatStoreItemName(name: string): string;
     map<T>(fn: {
         (item: StoreItem, idx?: number): T;
