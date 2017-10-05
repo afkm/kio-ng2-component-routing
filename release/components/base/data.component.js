@@ -35,7 +35,9 @@ var DataComponent = (function (_super) {
             var componentStates = _this.componentStatesForContentState(contentStateChange.currentValue);
             return Observable.of.apply(Observable, componentStates);
         }).subscribe(function (componentState) {
-            _this.contentResolver.updateComponentState(_this, componentState);
+            if (_this.contentResolver) {
+                _this.contentResolver.updateComponentState(_this, componentState);
+            }
         });
         if (_this.contentResolver) {
             if (!_this.node) {
