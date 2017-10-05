@@ -68,6 +68,8 @@ var ContentDataComponent = (function (_super) {
         this.backend.loadNodeContent(this.node, {}).subscribe(function (response) {
             _this.setData(response.data);
             _this.onAfterLoad();
+        }, function (error) {
+            console.error("Failed to load node content " + _this.node.cuid + ". Error: " + error);
         });
     };
     return ContentDataComponent;

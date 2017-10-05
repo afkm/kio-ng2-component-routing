@@ -243,7 +243,9 @@ export class DataComponent<T extends KioContentModel|KioFragmentModel|KioPublica
     const componentStates = this.componentStatesForContentState(contentStateChange.currentValue)
     return Observable.of(...componentStates)
   } ).subscribe ( componentState => {
-    this.contentResolver.updateComponentState(this,componentState)
+    if ( this.contentResolver ) {
+      this.contentResolver.updateComponentState(this,componentState)
+    }
   } )
 
 }
