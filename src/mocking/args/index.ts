@@ -1,7 +1,7 @@
 import { MockedData, MockingParams } from './interfaces'
 export * from './interfaces'
-const _zip = require('lodash/zip')
-const _zipObject = require('lodash/zipobject')
+const _zip = require('lodash.zip')
+const _zipObject = require('lodash.zipobject')
 
 export const encodeValue = ( value:any ):string => JSON.stringify(value)
 export const decodeValue = <T>( value:string ):T => JSON.parse(value)
