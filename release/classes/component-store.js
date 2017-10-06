@@ -73,7 +73,7 @@ var ComponentStore = (function () {
         var r = matchingComponents.sort(function (a, b) {
             var aValue = ComponentStore.AnnotationValue(a.annotation);
             var bValue = ComponentStore.AnnotationValue(b.annotation);
-            return aValue - bValue;
+            return bValue - aValue;
         });
         return r.shift();
     };
