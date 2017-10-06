@@ -7,8 +7,8 @@ var __assign = (this && this.__assign) || Object.assign || function(t) {
     return t;
 };
 import { KioContentModel, KioFragmentModel } from 'kio-ng2-data';
-var _zip = require('lodash/zip');
-var _zipObject = require('lodash/zipobject');
+var _zip = require('lodash.zip');
+var _zipObject = require('lodash.zipobject');
 import { renderDataForNode } from '../media';
 import { defaultStore } from '../../classes/component-store';
 var parseMockingArgs = function (cuid) {

@@ -1,5 +1,5 @@
-var _zip = require('lodash/zip');
-var _zipObject = require('lodash/zipobject');
+var _zip = require('lodash.zip');
+var _zipObject = require('lodash.zipobject');
 export var encodeValue = function (value) { return JSON.stringify(value); };
 export var decodeValue = function (value) { return JSON.parse(value); };
 export var format = function (params) {

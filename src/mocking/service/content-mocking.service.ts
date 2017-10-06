@@ -1,6 +1,6 @@
 import { KioNode, KioNodeModel, KioContentModel, KioFragmentModel } from 'kio-ng2-data'
-const _zip = require('lodash/zip')
-const _zipObject = require('lodash/zipobject')
+const _zip = require('lodash.zip')
+const _zipObject = require('lodash.zipobject')
 import { KioTxtData, KioSrcData } from 'kio-ng2-data'
 import { renderDataForNode } from '../media'
 import { defaultStore } from '../../classes/component-store'
