@@ -89,7 +89,7 @@ export class ComponentStore implements Store {
     const r = matchingComponents.sort ( ( a:StoreItem, b:StoreItem ) => {
       const aValue = ComponentStore.AnnotationValue ( a.annotation )
       const bValue = ComponentStore.AnnotationValue ( b.annotation )      
-      return aValue - bValue
+      return bValue-aValue
     } )
 
     return r.shift()
