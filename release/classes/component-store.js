@@ -11,7 +11,7 @@ var getListQueryValue = function (listQuery, m) {
                 case "deepEqual":
                     return getListQueryValue(listQuery[key], 10);
                 default:
-                    return getListQueryValue(listQuery[key]);
+                    return getListQueryValue(listQuery[key] || []);
             }
         });
         return propValues.reduce(function (c, p, i) { return c + p; });

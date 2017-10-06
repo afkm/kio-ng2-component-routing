@@ -16,7 +16,7 @@ const getListQueryValue = ( listQuery:Annotation<ContentType>, m:number=1 ):numb
           return getListQueryValue ( listQuery[key], 10 )
         
         default:
-          return getListQueryValue ( listQuery[key] )
+          return getListQueryValue ( listQuery[key] || [] )
       }
     } )
     return propValues.reduce((c,p,i)=>c+p)
