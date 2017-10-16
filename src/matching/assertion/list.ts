@@ -10,23 +10,8 @@ import {
 } from '../../interfaces'
 import { getFilter, eq, isValueFilter } from './value'
 
-export interface Predicate { 
-  ( arg:any ) : boolean 
-}
+import { Predicate, ListValue, Longish, Range, MatchParam } from './interfaces'
 
-export interface Longish<T> {
-  length:T
-}
-
-export interface Range<T> {
-  min?:T;
-  max?:T;
-}
-
-export type ListValue = any[]
-
-
-export type MatchParam<T> = T|ValueTest<T>
 
 /**
  * requires {filter} to match each element of {otherValues}
