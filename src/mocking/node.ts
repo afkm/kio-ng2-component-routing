@@ -6,7 +6,7 @@ import { cuid } from './cuid'
  * arg = ['txt.heading',['src.big-image','txt.paragraph']]
  */
 
-export const mockNodeOfType = ( nodeType:string, children:string[]=[] ):KioNode => {
+export function mockNodeOfType ( nodeType:string, children:string[]=[] ):KioNode {
 
   const [ type , ...modifiers ] = nodeType.split('.')
 
@@ -27,7 +27,7 @@ export const mockNodeOfType = ( nodeType:string, children:string[]=[] ):KioNode 
   return mockedNode
 }
 
-export const mockType = ( value:string|any[], children?:string[] ):KioNode => {
+export function mockType ( value:string|any[], children?:string[] ):KioNode {
   let node
   if ( 'string' === typeof value )
   {

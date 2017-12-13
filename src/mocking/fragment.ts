@@ -2,7 +2,7 @@ import { KioFragmentModel } from 'kio-ng2-data'
 import { cuid } from './cuid'
 import { mockContentFromString } from './content'
 
-export const mockFragment = ( children:any[], modifiers:string[]=[] ):KioFragmentModel => {
+export function mockFragment ( children:any[], modifiers:string[]=[] ):KioFragmentModel {
   return new KioFragmentModel ( {
     cuid: cuid() ,
     modifiers ,
