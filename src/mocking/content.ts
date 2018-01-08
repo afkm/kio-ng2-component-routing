@@ -16,12 +16,12 @@ const parse = ( value:string ):any[] => {
 }
 
 
-export const mockContentFromString = ( selector:string ) => {
+export function mockContentFromString ( selector:string ):KioContentModel {
   const [ m , typeName , typeParams , ...modifiers ] = selector.match( /^(\w+)(\(.*\))?(\.\w+){0,}/ )
   return mockContent ( typeName , modifiers )
 }
 
-export const mockContentWithArgs = <T extends {}>( nodeType:string, data:T ) => {
+export function mockContentWithArgs <T extends {}>( nodeType:string, data:T ) {
   const [ type , ...modifiers ] = nodeType.split('.')
   const params = formatArgs (data)
   const mockedData = {
@@ -33,7 +33,7 @@ export const mockContentWithArgs = <T extends {}>( nodeType:string, data:T ) => 
   return mockedData
 }
 
-export const mockContent = ( value:string, modifiers:string[]=[] ) => {
+export function mockContent ( value:string, modifiers:string[]=[] ):KioContentModel {
   const [ typeName , typeModifiers=[] , typeParams='' ] = parse ( value )  
   const params = typeParams.slice(1,-1)
                     .split(';')

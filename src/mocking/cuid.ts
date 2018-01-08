@@ -1,6 +1,6 @@
 const _cuid = require('cuid')
 
-export const cuid = ( ...params:string[] ):string => {
+export function cuid ( ...params:string[] ):string {
   const prefixes = [ 'mock' , ...params ]  
   return '[' + prefixes.join('][')  + ']' + _cuid()
 }

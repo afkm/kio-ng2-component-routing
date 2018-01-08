@@ -5,9 +5,10 @@
     <li *ngFor="let mod of node?.modifiers">{{ mod }}</li>
   </ul>
 </div> -->
+<a [name]="node?.cuid" [id]="node?.cuid"></a>
 <ng-container *ngIf="componentIndex !== undefined">
   <ng-container *ngIf="componentIndex === -1">
     <list-component-router [node]="node"></list-component-router>
   </ng-container>
 </ng-container>
-<div #mountPoint [id]="node?.cuid" ></div>
+<div #mountPoint></div>
