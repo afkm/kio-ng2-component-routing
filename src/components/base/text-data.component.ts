@@ -18,9 +18,11 @@ export class TextDataComponent extends ContentDataComponent implements OnInit, O
 
   // override ContentDataComponent::loadNodeContent() to use text from publication structure
   protected loadNodeContent ( ) {
-    if ( this.node.text ) {
+    
+    const typeUnsecureNode:any = this.node // TODO: Refactor KioContentModel to represent text property
+    if ( typeUnsecureNode.text ) {
       this.onBeforeLoad()
-      this.text = this.node.text
+      this.text = typeUnsecureNode.text
       this.onAfterLoad()
     } else {
       super.loadNodeContent()
