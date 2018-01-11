@@ -16,4 +16,17 @@ export class TextDataComponent extends ContentDataComponent implements OnInit, O
     super.onUpdate()
   }
 
+  // override ContentDataComponent::loadNodeContent() to use text from publication structure
+  protected loadNodeContent ( ) {
+    if ( this.node.text ) {
+      this.onBeforeLoad()
+      this.text = this.node.text
+      this.onAfterLoad()
+    } else {
+      super.loadNodeContent()
+    }
+    
+    
+  }  
+
 }
