@@ -23,6 +23,9 @@ export class TextDataComponent extends ContentDataComponent implements OnInit, O
     if ( typeUnsecureNode.text ) {
       this.onBeforeLoad()
       this.text = typeUnsecureNode.text
+      this.setData ( {
+        text: typeUnsecureNode.text
+      } )
       this.onAfterLoad()
     } else {
       super.loadNodeContent()
