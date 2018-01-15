@@ -73,14 +73,19 @@ export class ContentDataComponent extends DataComponent<KioContentModel> impleme
 
   protected loadNodeContent ( ) {
     this.onBeforeLoad()
-    this.backend.loadNodeContent ( this.node, {} ).subscribe ( response => {
-        this.setData ( response.data )
+    this.backend.loadNodeContent ( this.node, {} ).subscribe ( (response:any) => {
+        const data = this.readDataResponse ( response )
+        this.setData ( data )
         this.onAfterLoad()
       },
       ( error:Error ) => {
         console.error ( `Failed to load node content ${this.node.cuid}. Error: ${error}` )
       }
     )
+  }
+
+  protected readDataResponse ( response:any ):any {
+    return response.data
   }
 
   /*protected logger=Object.assign(this.logger,{
