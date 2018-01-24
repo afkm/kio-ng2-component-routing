@@ -1,0 +1,26 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "project": {
+    "name": "kio-ng2-component-routing"
+  },
+  "apps": [
+    {
+      "root": "src",
+      "outDir": "dist",
+      "tsconfig": "../tsconfig-ngc.json",
+      "testTsconfig": "../tsconfig.json",
+      "prefix": "app",
+      "styles": [],
+      "scripts": [],
+      "environmentSource": "../test-app/src/environments/environment.ts",
+      "environments": {
+        "dev": "../test-app/src/environments/environment.ts",
+        "prod": "../test-app/src/environments/environment.prod.ts"
+      }
+    }
+  ],
+  "defaults": {
+    "styleExt": "css",
+    "component": {}
+  }
+}

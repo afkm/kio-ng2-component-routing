@@ -25,6 +25,8 @@ export { ComponentContentResolver } from './interfaces/content-resolver'
 export { defaultStore } from './classes/component-store'
 export { Factory, mock }
 export { ContentMockingService } from './mocking/service/content-mocking.service'
+import { OutlineService } from './services/outline.service'
+
 
 export let RoutingComponents = [ ComponentRouter, ListComponentRouter, DataComponent, FragmentDataComponent, ContentDataComponent, TextDataComponent ]
 
@@ -40,7 +42,8 @@ export let RoutingComponents = [ ComponentRouter, ListComponentRouter, DataCompo
     BackendService,
     ContentLoaderDirective,
     DataDirective,
-    ResizingService
+    ResizingService,
+    OutlineService
   ],
   entryComponents: [
     ...RoutingComponents

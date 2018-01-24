@@ -11,9 +11,12 @@ import { NODE_MODEL } from '../../node-model.token'
 import { CONTENT_RESOLVER } from '../../content-resolver.token'
 import { contentResolverFactory } from '../../resolver/content.factory'
 import { defaultStore } from '../../classes/component-store'
+import { OutlineService } from '../../services/outline.service'
+
 
 import { createComponentOnViewContainer, componentItemByName, createComponentItemOnViewContainer } from '../../factory'
 
+const Reflect = global['Reflect'];
 
 @Component({
   moduleId: module.id,
@@ -21,6 +24,8 @@ import { createComponentOnViewContainer, componentItemByName, createComponentIte
   templateUrl: './router.component.html'
 })
 export class ComponentRouter extends DataComponent<KioContentModel|KioFragmentModel> implements OnChanges {
+
+  private outlineService:OutlineService=this.injector.get(OutlineService)
 
   private componentFactoryResolver:ComponentFactoryResolver=this.injector.get(ComponentFactoryResolver)
 
@@ -83,6 +88,11 @@ export class ComponentRouter extends DataComponent<KioContentModel|KioFragmentMo
       this.componentIndex = defaultStore.indexOf ( componentStructure )
       this.log('mounting component: %s', componentStructure.name )
       this.mountedComponent = createComponentItemOnViewContainer(componentStructure,this.componentFactoryResolver,this.mountPoint,this.node,this.viewParams)
+      const annotation:any = (Reflect.getMetadata('annotations',componentStructure.component)||[]).find ( annotation => {
+        return annotation instanceof Component
+      } )
+      const children = (this.node instanceof KioFragmentModel) ? this.node.children.slice() : []
+      this.outlineService.registerNode(this.node,annotation.selector)
       this.mount.emit(this.mountedComponent)
     } else {
       this.componentIndex = -1
